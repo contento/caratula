@@ -6,3 +6,7 @@ export * from "./validate.js";
 export * from "./generate.js";
 export { ModelLadder } from "./providers/index.js";
 export { EchoProvider } from "./providers/echo.js";
+export { OpenAICompatProvider, type OpenAICompatConfig } from "./providers/openai-compat.js";
+export { createOllamaProvider, type OllamaOptions } from "./providers/ollama.js";
+export { createLMStudioProvider, type LMStudioOptions } from "./providers/lmstudio.js";
+export { createOpenRouterProvider, type OpenRouterOptions } from "./providers/openrouter.js";

@@ -75,6 +75,22 @@ so you can see the validator snap colors and strip disallowed elements. Real LLM
 | [`packages/core`](packages/core) | Engine: types, palettes, prompt builder, providers, SVG validator, generate |
 | [`packages/cli`](packages/cli) | Command-line interface over the engine |
 
+## LLM providers
+
+caratula turns minimal text into simple SVG via any OpenAI-compatible backend — local or remote:
+
+```sh
+# local, free (Ollama)
+caratula generate star water travel --palette sepia --provider ollama --model qwen2.5-coder
+
+# remote (OpenRouter — Grok, or a cheap model)
+export OPENROUTER_API_KEY=sk-or-...
+caratula generate star water travel --palette sepia --provider openrouter --model x-ai/grok-2-1212
+```
+
+Backends: `echo` (placeholder) · `ollama` · `lmstudio` · `openrouter`. Full setup — including the
+cheapest OpenRouter picks — is in **[docs/providers.md](docs/providers.md)**.
+
 ---
 
 ## Origin — the founding prompt

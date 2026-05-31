@@ -26,12 +26,17 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 > Goal: replace the Echo placeholder with real LLMs producing valid, on-aesthetic SVG.
 
-- [ ] **Ollama provider** (local, free) — first real rung of the model ladder
+- [x] **OpenAI-compatible provider** base (shared by all chat-completions backends)
+- [x] **Ollama provider** (local, free)
+- [x] **LM Studio provider** (local, free)
+- [x] **OpenRouter provider** (remote — Grok + cheap models)
+- [x] CLI wiring: `--provider` / `--model` / `--base-url`; minimalist `SYSTEM_PROMPT`
+- [x] Provider docs ([docs/providers.md](docs/providers.md)) + `.env.example`
+- [ ] Verify against a live local model (Ollama/LM Studio) and tune the prompt
 - [ ] **Anthropic provider** (Claude — strongest at SVG), with prompt caching
-- [ ] Provider config/env wiring (which rungs, in what order)
+- [ ] Model ladder wiring (local first, escalate to remote)
 - [ ] Validator unit tests (palette-snap, primitives, text, complexity)
 - [ ] Re-enable the CI `test` step (currently commented out in `ci.yml`)
-- [ ] Prompt iteration: tune `buildPrompt` against real model output
 
 ---
 

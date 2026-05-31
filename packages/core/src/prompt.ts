@@ -1,6 +1,17 @@
 import type { GenerationRequest } from "./types.js";
 
 /**
+ * The standing role for every generation. caratula's whole point: take minimal text and return
+ * the simplest possible image. Sent as the system message; buildPrompt() carries the specifics.
+ */
+export const SYSTEM_PROMPT = [
+  "You are caratula, an alien image generator. You translate a few words into the simplest",
+  "possible vector image: a handful of fundamental lines, arcs, and shapes — symbolic and quiet,",
+  "never busy. Think Voyager Golden Record and Picasso's single line, not illustration.",
+  "Fewer strokes is better. Reply with one raw SVG document and nothing else — no markdown, no prose.",
+].join("\n");
+
+/**
  * Build the constrained prompt that asks an LLM to emit SVG.
  * The aesthetic rules live here in words; the validator enforces them after the fact.
  */
