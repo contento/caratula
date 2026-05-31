@@ -1,0 +1,36 @@
+# graphify ignore -- keep the graph focused on first-party caratula source.
+# NOTE: graphify uses .graphifyignore INSTEAD of the root .gitignore, so the
+# build-artifact exclusions below must be repeated here (they are NOT inherited).
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs & intermediates
+dist/
+build/
+*.tsbuildinfo
+.turbo/
+.cache/
+coverage/
+.nyc_output/
+
+# Future surfaces (build artifacts)
+.svelte-kit/
+src-tauri/target/
+
+# graphify's own output (never index the graph into itself)
+graphify-out/
+
+# Generated images / local store
+out/
+*.sqlite
+*.sqlite-journal
+*.db
+
+# Lockfiles & generated config (not first-party logic)
+pnpm-lock.yaml
+
+# Logs & OS cruft
+*.log
+.DS_Store
