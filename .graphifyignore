@@ -31,6 +31,10 @@ out/
 # Lockfiles & generated config (not first-party logic)
 pnpm-lock.yaml
 
+# Tests & test config (keep the graph focused on first-party logic)
+*.test.ts
+vitest.config.ts
+
 # Logs & OS cruft
 *.log
 .DS_Store

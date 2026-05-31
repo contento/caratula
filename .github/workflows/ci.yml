@@ -38,5 +38,5 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      # - name: Test
-      #   run: pnpm test   # TODO: enable once packages define tests (see TODO.md)
+      - name: Test
+        run: pnpm test

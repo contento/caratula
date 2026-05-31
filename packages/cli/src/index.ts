@@ -7,13 +7,10 @@ import {
   DEFAULT_CONSTRAINTS,
   getPalette,
   BUILTIN_PALETTES,
-  EchoProvider,
-  createOllamaProvider,
-  createLMStudioProvider,
-  createOpenRouterProvider,
   type GenerationRequest,
   type LLMProvider,
 } from "@caratula/core";
+import { buildProvider } from "./provider-factory.js";
 
 const program = new Command();
 
@@ -30,30 +27,6 @@ program
       console.log(`${p.id.padEnd(12)} ${p.colors.length} colors  ${p.label ?? ""}`);
     }
   });
-
-/** Construct an LLM provider from the CLI options. See docs/providers.md. */
-function buildProvider(opts: { provider: string; model?: string; baseUrl?: string }): LLMProvider {
-  switch (opts.provider) {
-    case "echo":
-      return new EchoProvider();
-    case "ollama":
-      return createOllamaProvider({ model: opts.model, baseUrl: opts.baseUrl });
-    case "lmstudio":
-      return createLMStudioProvider({ model: opts.model, baseUrl: opts.baseUrl });
-    case "openrouter":
-      return createOpenRouterProvider({
-        model: opts.model,
-        baseUrl: opts.baseUrl,
-        apiKey: process.env.OPENROUTER_API_KEY ?? "",
-        referer: "https://github.com/contento/caratula",
-        title: "caratula",
-      });
-    default:
-      throw new Error(
-        `Unknown provider "${opts.provider}". Use: echo | ollama | lmstudio | openrouter.`
-      );
-  }
-}
 
 program
   .command("generate")

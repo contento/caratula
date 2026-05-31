@@ -32,11 +32,12 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [x] **OpenRouter provider** (remote — Grok + cheap models)
 - [x] CLI wiring: `--provider` / `--model` / `--base-url`; minimalist `SYSTEM_PROMPT`
 - [x] Provider docs ([docs/providers.md](docs/providers.md)) + `.env.example`
+- [x] **Test suite** (Vitest): 69 tests across validator, palettes, prompt, generate, providers,
+      model ladder, HTTP provider (mocked fetch), factories — coverage thresholds enforced (≥98%)
+- [x] Re-enable the CI `test` step (now runs with coverage gating)
 - [ ] Verify against a live local model (Ollama/LM Studio) and tune the prompt
 - [ ] **Anthropic provider** (Claude — strongest at SVG), with prompt caching
 - [ ] Model ladder wiring (local first, escalate to remote)
-- [ ] Validator unit tests (palette-snap, primitives, text, complexity)
-- [ ] Re-enable the CI `test` step (currently commented out in `ci.yml`)
 
 ---
 
