@@ -70,6 +70,8 @@ OWL reasoners or local diffusion. Start in TS; drop down only where measured.
 ## Inputs & outputs
 
 - **Input:** tag set + palette + constraints (CLI flags, TUI form, web form, or API request/JSON).
+- **Input (caratulize):** an uploaded image (restricted format/size/dimensions) → a vision model
+  reduces it to a caratula (ES: *caratulizar*). Same validator pipeline. See Roadmap **M6**.
 - **Output:** SVG (default) → exports: **PDF, PNG, JPEG, ICO** (+ suggest: WebP, EPS).
 - **Persistence:** files **and/or** DB (SQLite or Postgres), selectable.
 
