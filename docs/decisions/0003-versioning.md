@@ -5,7 +5,7 @@
 
 ## Context
 
-caratula is a monorepo with multiple packages (`core`, `cli`, and deferred `web`/`desktop`/
+caratulai is a monorepo with multiple packages (`core`, `cli`, and deferred `web`/`desktop`/
 `server`). We need a policy for both the project's own version and its dependencies. Options for
 project versioning ranged from lockstep (one version for the whole repo) to independent
 per-package versioning via Changesets.

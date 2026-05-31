@@ -9,13 +9,13 @@ import {
   BUILTIN_PALETTES,
   type GenerationRequest,
   type LLMProvider,
-} from "@caratula/core";
+} from "@caratulai/core";
 import { buildProvider } from "./provider-factory.js";
 
 const program = new Command();
 
 program
-  .name("caratula")
+  .name("caratulai")
   .description("Alien image generator — concepts to simple vector images in fundamental palettes")
   .version("0.0.0");
 
@@ -32,7 +32,7 @@ program
   .command("generate")
   .description("Generate an SVG from concept tags")
   .argument("<tags...>", "concept tags, e.g. star water travel")
-  .option("-p, --palette <id>", "palette id (see `caratula palettes`)", "bw")
+  .option("-p, --palette <id>", "palette id (see `caratulai palettes`)", "bw")
   .option("-P, --provider <name>", "llm backend: echo | ollama | lmstudio | openrouter", "echo")
   .option("-m, --model <model>", "model id (provider-specific default)")
   .option("--base-url <url>", "override the provider base URL")

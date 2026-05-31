@@ -1,10 +1,10 @@
 {
-  "name": "@caratula/cli",
+  "name": "@caratulai/cli",
   "version": "0.0.0",
   "type": "module",
-  "description": "caratula command-line interface",
+  "description": "caratulai command-line interface",
   "bin": {
-    "caratula": "./dist/index.js"
+    "caratulai": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -15,7 +15,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@caratula/core": "workspace:*",
+    "@caratulai/core": "workspace:*",
     "commander": "^15.0.0"
   },
   "devDependencies": {

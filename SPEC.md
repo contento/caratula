@@ -1,4 +1,4 @@
-# caratula — Spec
+# caratulai — Spec
 
 An **alien image generator**: concepts (tags/ontology) → simple **vector** images in
 **fundamental palettes**. Lineage: contento/conten.to · Voyager Golden Record · Picasso's line.
@@ -71,14 +71,14 @@ OWL reasoners or local diffusion. Start in TS; drop down only where measured.
 
 - **Input:** tag set + palette + constraints (CLI flags, TUI form, web form, or API request/JSON).
 - **Input (caratulize):** an uploaded image (restricted format/size/dimensions) → a vision model
-  reduces it to a caratula (ES: *caratulizar*). Same validator pipeline. See Roadmap **M6**.
+  reduces it to a caratulai (ES: *caratulizar*). Same validator pipeline. See Roadmap **M6**.
 - **Output:** SVG (default) → exports: **PDF, PNG, JPEG, ICO** (+ suggest: WebP, EPS).
 - **Persistence:** files **and/or** DB (SQLite or Postgres), selectable.
 
 ## Non-goals (v1)
 
 - Diffusion/raster generation as the primary path (optional mode only).
-- Full document/body composition — caratula makes the *image*, not the document.
+- Full document/body composition — caratulai makes the *image*, not the document.
 - WYSIWYG vector editor (it generates; external tools edit).
 - Multi-user accounts / collaboration.
 - Colorful, ornate, or photorealistic output — out of scope **by design**.

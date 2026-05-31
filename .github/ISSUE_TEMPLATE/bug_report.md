@@ -19,6 +19,6 @@ labels: bug
 
 **Environment**
 
-- caratula version / commit:
+- caratulai version / commit:
 - OS:
 - Node version:

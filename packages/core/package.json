@@ -1,8 +1,8 @@
 {
-  "name": "@caratula/core",
+  "name": "@caratulai/core",
   "version": "0.0.0",
   "type": "module",
-  "description": "caratula engine: ontology, palettes, prompt builder, LLM providers, SVG validator",
+  "description": "caratulai engine: ontology, palettes, prompt builder, LLM providers, SVG validator",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

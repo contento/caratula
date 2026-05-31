@@ -1,7 +1,7 @@
 # LLM providers
 
-caratula generates SVG by asking an LLM. The whole goal is **minimalistic text → simple images**:
-a few words in, a handful of fundamental lines out. caratula speaks the **OpenAI
+caratulai generates SVG by asking an LLM. The whole goal is **minimalistic text → simple images**:
+a few words in, a handful of fundamental lines out. caratulai speaks the **OpenAI
 chat-completions API**, so any compatible backend works — local or remote — behind the same
 `--provider` flag.
 
@@ -33,7 +33,7 @@ disallowed elements, removes text, and caps complexity — so even a small model
 3. Generate:
 
    ```sh
-   caratula generate star water travel --palette sepia \
+   caratulai generate star water travel --palette sepia \
      --provider ollama --model qwen2.5-coder --out out/idea.svg
    ```
 
@@ -46,7 +46,7 @@ Override the host with `--base-url http://your-host:11434/v1` if Ollama runs els
 3. Use the **exact model identifier** shown in LM Studio as `--model`:
 
    ```sh
-   caratula generate moon tide --palette grayscale \
+   caratulai generate moon tide --palette grayscale \
      --provider lmstudio --model "qwen2.5-coder-7b-instruct" --out out/idea.svg
    ```
 
@@ -65,11 +65,11 @@ easiest way to try the costlier/stronger tiers.
 
    ```sh
    # Grok (xAI) — capable, characterful
-   caratula generate star water travel --palette sepia \
+   caratulai generate star water travel --palette sepia \
      --provider openrouter --model x-ai/grok-2-1212 --out out/grok.svg
 
    # Cheapest sensible default — fast and very cheap, plenty for simple SVG
-   caratula generate star water travel --palette sepia \
+   caratulai generate star water travel --palette sepia \
      --provider openrouter --model google/gemini-2.0-flash-001 --out out/cheap.svg
    ```
 
@@ -83,7 +83,7 @@ list (and any free-tier models).
 
 ## Notes
 
-- API keys are read by the **CLI** (the surface), never by `@caratula/core` — the engine stays
+- API keys are read by the **CLI** (the surface), never by `@caratulai/core` — the engine stays
   I/O-agnostic. Put secrets in `.env` (gitignored); see `.env.example`.
 - Local servers can be slow on first call (model load). Providers use generous timeouts.
 - A future **model ladder** will chain providers (local first, escalate to remote); the building

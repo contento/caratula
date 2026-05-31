@@ -1,11 +1,11 @@
-# caratula
+# caratulai
 
-[![CI](https://github.com/contento/caratula/actions/workflows/ci.yml/badge.svg)](https://github.com/contento/caratula/actions/workflows/ci.yml)
+[![CI](https://github.com/contento/caratulai/actions/workflows/ci.yml/badge.svg)](https://github.com/contento/caratulai/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Carátula** (Spanish): the cover sheet / title page — the first image you meet.
 
-caratula is an **alien image generator**: it turns *concepts* (tags, not narratives) into
+caratulai is an **alien image generator**: it turns *concepts* (tags, not narratives) into
 **simple vector images** — line, arc, diagonal — in restrained, fundamental palettes.
 
 The lineage is **contento / conten.to**, the **Voyager 1 Golden Record** and Pioneer plaque,
@@ -13,7 +13,7 @@ and **Picasso's line**. The goal is imagery that feels like a message left for s
 never seen Earth: fundamental, symbolic, quiet. The reaction against conten.to's current imagery
 is deliberate — **less obvious, far less colorful.**
 
-The musical analogy: caratula plays **simple chords — A, Am, C#.** This is *not* Berlioz or
+The musical analogy: caratulai plays **simple chords — A, Am, C#.** This is *not* Berlioz or
 Philip Glass; it's the **Beatles, Paul Simon, Camilo Sesto, Gardel, Edith Piaf** — a small
 vocabulary of familiar forms arranged for directness and feeling. Song-craft, not symphony.
 
@@ -26,6 +26,8 @@ is the first image you meet, the face a work shows the world.
 The name is a stance. Generated imagery had become very complex — and as much as I love Bach and
 computers, I value **simplicity and minimalism** above all. I love a **simple carátula**. This tool
 exists to make them.
+
+**caratulai** = *carátula* + **AI** — the cover, drawn by a machine.
 
 ## Principles
 
@@ -77,15 +79,15 @@ so you can see the validator snap colors and strip disallowed elements. Real LLM
 
 ## LLM providers
 
-caratula turns minimal text into simple SVG via any OpenAI-compatible backend — local or remote:
+caratulai turns minimal text into simple SVG via any OpenAI-compatible backend — local or remote:
 
 ```sh
 # local, free (Ollama)
-caratula generate star water travel --palette sepia --provider ollama --model qwen2.5-coder
+caratulai generate star water travel --palette sepia --provider ollama --model qwen2.5-coder
 
 # remote (OpenRouter — Grok, or a cheap model)
 export OPENROUTER_API_KEY=sk-or-...
-caratula generate star water travel --palette sepia --provider openrouter --model x-ai/grok-2-1212
+caratulai generate star water travel --palette sepia --provider openrouter --model x-ai/grok-2-1212
 ```
 
 Backends: `echo` (placeholder) · `ollama` · `lmstudio` · `openrouter`. Full setup — including the

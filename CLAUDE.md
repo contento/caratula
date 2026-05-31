@@ -1,6 +1,6 @@
 # CLAUDE.md — instructions for working in this repo
 
-Project: **caratula** — an alien image generator. Concepts (tags/ontology) → simple **vector**
+Project: **caratulai** — an alien image generator. Concepts (tags/ontology) → simple **vector**
 images in fundamental palettes. See [SPEC.md](SPEC.md) and [README.md](README.md).
 
 ## Working agreement
@@ -39,7 +39,7 @@ All-TypeScript monorepo (pnpm workspaces + Turborepo). See [ADR 0002](docs/decis
 
 ## Conventions
 
-- Workspace packages are ESM TypeScript, `@caratula/<name>` scope.
+- Workspace packages are ESM TypeScript, `@caratulai/<name>` scope.
 - `core` stays I/O-agnostic — no direct DB/filesystem in the engine; surfaces inject those.
 - Built-in palettes and the SVG sanitizer are the source of truth for the aesthetic constraints.
 

@@ -1,7 +1,7 @@
 import type { Palette } from "./types.js";
 
 /**
- * Built-in fundamental palettes — the source of truth for caratula's color discipline.
+ * Built-in fundamental palettes — the source of truth for caratulai's color discipline.
  * Restrained hue, earth/primary tones. No rainbows, no neon.
  */
 

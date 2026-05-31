@@ -5,7 +5,7 @@
 
 ## Context
 
-caratula's aesthetic is vector-native and symbolic: Voyager Golden Record / Pioneer plaque,
+caratulai's aesthetic is vector-native and symbolic: Voyager Golden Record / Pioneer plaque,
 Picasso line, tags-not-narratives, fundamental palettes, arcs and diagonals, little/no text.
 Diffusion image models (Stable Diffusion, DALL·E, etc.) produce raster output, are hard to
 constrain to a fixed palette, and tend toward exactly the colorful/ornate noise we reject.

@@ -5,7 +5,7 @@
 
 ## Context
 
-caratula needs four surfaces — web, TUI/CLI, desktop, backend — on Windows/macOS/Linux/Web.
+caratulai needs four surfaces — web, TUI/CLI, desktop, backend — on Windows/macOS/Linux/Web.
 Candidate directions: all-TypeScript, Rust-core + Tauri/ratatui, or polyglot (Python core).
 
 ## Decision

@@ -6,7 +6,7 @@ labels: enhancement
 
 **The idea**
 
-<!-- What would you like caratula to do? -->
+<!-- What would you like caratulai to do? -->
 
 **Why**
 

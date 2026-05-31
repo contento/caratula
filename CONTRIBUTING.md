@@ -1,6 +1,6 @@
-# Contributing to caratula
+# Contributing to caratulai
 
-Thanks for your interest! caratula is an alien image generator — concepts to simple vector images
+Thanks for your interest! caratulai is an alien image generator — concepts to simple vector images
 in fundamental palettes. Before contributing, skim [README.md](README.md) and [SPEC.md](SPEC.md)
 to absorb the aesthetic; it is enforced, not optional.
 
@@ -31,7 +31,7 @@ run `graphify update .` if you have graphify installed.
 
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) — `feat:`, `fix:`,
   `docs:`, `chore:`, `refactor:`, `test:`. Keep them small and focused.
-- **Code:** ESM TypeScript, `@caratula/<name>` scope. Match the surrounding style.
+- **Code:** ESM TypeScript, `@caratulai/<name>` scope. Match the surrounding style.
 - **Aesthetic:** any change to generation must keep output passing the validator — fundamental
   palettes only, simple primitives, little/no text. See the guardrails in [CLAUDE.md](CLAUDE.md).
 - **Decisions:** record non-obvious choices as short ADRs in `docs/decisions/`.

@@ -1,4 +1,4 @@
-# graphify ignore -- keep the graph focused on first-party caratula source.
+# graphify ignore -- keep the graph focused on first-party caratulai source.
 # NOTE: graphify uses .graphifyignore INSTEAD of the root .gitignore, so the
 # build-artifact exclusions below must be repeated here (they are NOT inherited).
 

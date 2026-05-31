@@ -1,5 +1,5 @@
 /**
- * Core domain types for caratula.
+ * Core domain types for caratulai.
  *
  * The engine is I/O-agnostic: it turns tags + palette + constraints into validated SVG.
  * Surfaces (cli/web/desktop/server) own persistence and inject providers.

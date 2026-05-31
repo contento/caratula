@@ -4,7 +4,7 @@ import {
   createLMStudioProvider,
   createOpenRouterProvider,
   type LLMProvider,
-} from "@caratula/core";
+} from "@caratulai/core";
 
 export interface ProviderOptions {
   provider: string;
@@ -14,7 +14,7 @@ export interface ProviderOptions {
 
 /**
  * Construct an LLM provider from CLI options. Env is injectable for testing; keys are read here
- * in the surface, never in `@caratula/core`. See docs/providers.md.
+ * in the surface, never in `@caratulai/core`. See docs/providers.md.
  */
 export function buildProvider(
   opts: ProviderOptions,
@@ -32,8 +32,8 @@ export function buildProvider(
         model: opts.model,
         baseUrl: opts.baseUrl,
         apiKey: env.OPENROUTER_API_KEY ?? "",
-        referer: "https://github.com/contento/caratula",
-        title: "caratula",
+        referer: "https://github.com/contento/caratulai",
+        title: "caratulai",
       });
     default:
       throw new Error(

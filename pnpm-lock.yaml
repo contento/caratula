@@ -23,7 +23,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@caratula/core':
+      '@caratulai/core':
         specifier: workspace:*
         version: link:../core
       commander:

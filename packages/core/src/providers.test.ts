@@ -59,12 +59,12 @@ describe("OpenAICompatProvider — request shaping", () => {
 
     const withKey = new OpenAICompatProvider({
       name: "x", baseUrl: "http://h/v1", model: "m", apiKey: "secret",
-      headers: { "X-Title": "caratula" },
+      headers: { "X-Title": "caratulai" },
     });
     await withKey.generateSvg("P", PARAMS);
     const h1 = fetchMock.mock.calls[0]![1]!.headers;
     expect(h1.authorization).toBe("Bearer secret");
-    expect(h1["X-Title"]).toBe("caratula");
+    expect(h1["X-Title"]).toBe("caratulai");
 
     const noKey = new OpenAICompatProvider({ name: "x", baseUrl: "http://h/v1", model: "m" });
     await noKey.generateSvg("P", PARAMS);
@@ -118,12 +118,12 @@ describe("OpenAICompatProvider — failures", () => {
     const fetchMock = vi.fn(async () => okResponse("<svg/>"));
     vi.stubGlobal("fetch", fetchMock);
     const p = createOpenRouterProvider({
-      apiKey: "sk-or-x", referer: "https://github.com/contento/caratula", title: "caratula",
+      apiKey: "sk-or-x", referer: "https://github.com/contento/caratulai", title: "caratulai",
     });
     await p.generateSvg("P", PARAMS);
     const h = fetchMock.mock.calls[0]![1]!.headers;
-    expect(h["HTTP-Referer"]).toBe("https://github.com/contento/caratula");
-    expect(h["X-Title"]).toBe("caratula");
+    expect(h["HTTP-Referer"]).toBe("https://github.com/contento/caratulai");
+    expect(h["X-Title"]).toBe("caratulai");
   });
 
   it("aborts after the timeout", async () => {

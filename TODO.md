@@ -1,4 +1,4 @@
-# caratula — Roadmap
+# caratulai — Roadmap
 
 Organized as **milestones** (a shippable increment with a goal) → **tasks** (checkboxes).
 Keep this current; promote big decisions to `docs/decisions/`. Open questions live in
@@ -48,7 +48,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [ ] SVG → PNG / JPEG (`@resvg/resvg-js`, `sharp`)
 - [ ] SVG → PDF (`pdf-lib` / `svg2pdf`)
 - [ ] SVG → ICO (`png-to-ico`)
-- [ ] `caratula export <svg> --to png,pdf,...` command
+- [ ] `caratulai export <svg> --to png,pdf,...` command
 - [ ] Decide extra formats (WebP, EPS?) — see SPEC
 
 ---
@@ -68,7 +68,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 > Goal: many ideas per concept, swept over hyperparameters.
 
-- [ ] `caratula vary` — surface `generateVariations` (palette × seed × model sweep)
+- [ ] `caratulai vary` — surface `generateVariations` (palette × seed × model sweep)
 - [ ] Gallery output (contact sheet / index of variations)
 - [ ] Reproducibility check: re-run from stored params reproduces the image
 
@@ -88,16 +88,16 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 ## M6 — Caratulize (image input) ⭐
 
 > Goal: upload an image (with restrictions) and **caratulize** it (ES: *caratulizar*) —
-> reduce it to a simple vector caratula in a fundamental palette. The image→caratula byproduct
+> reduce it to a simple vector caratulai in a fundamental palette. The image→caratulai byproduct
 > of the LLM-SVG pipeline: a vision model reads the image and emits constrained SVG, which then
 > runs through the same validator/sanitizer.
 
 - [ ] Input restrictions: allowed formats (PNG/JPEG/WebP), max dimensions, max file size
 - [ ] Vision provider interface (multimodal: image + constraints → SVG)
-- [ ] `caratula caratulize <image>` command (alias: `caratulizar`)
+- [ ] `caratulai caratulize <image>` command (alias: `caratulizar`)
 - [ ] Reuse the validator pipeline (palette-snap, allowed primitives, complexity cap, no text)
 - [ ] Safety/content checks on uploads (reject unsupported or disallowed content)
-- [ ] Tune the "simplify, don't reproduce" prompt so output is a caratula, not a tracing
+- [ ] Tune the "simplify, don't reproduce" prompt so output is a caratulai, not a tracing
 - Depends on: M1 (a real provider). Feasible to pull earlier once one vision model is wired.
 
 ---
