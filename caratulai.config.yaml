@@ -1,0 +1,39 @@
+# Caratulai Configuration
+# See CLAUDE.md and README.md for full documentation
+# Secrets (API keys) go in .env — this file is for configuration only
+
+cli:
+  # Default tags for quick testing (comma-separated)
+  default_tags: "prometheus,eagle,rock,fire,camel,lion,child"
+
+  # Seed for generation (1–2147483647)
+  seed: 1024
+
+generation:
+  # Canvas aspect ratio: square, 16:9, 4:3, 21:9, 9:16, 3:4
+  ratio: "16:9"
+
+  # Allow all SVG shapes (true = path, line, rect, circle, use, image, text, etc.)
+  # false = restrict to fundamental shapes only
+  allow_all_shapes: true
+
+models:
+  # Text extraction (narrative → concept tags)
+  text:
+    provider: "openrouter"
+    model: "deepseek/deepseek-v4-flash"
+
+  # SVG generation (tags → SVG)
+  svg:
+    provider: "openrouter"
+    model: "openai/gpt-4o-mini"
+
+output:
+  # Auto-save directory for generated SVGs (with timestamp filenames)
+  # Leave empty to disable. Format: {yyyyMMdd_HHmmssSSS}.svg
+  auto_save_dir: "./output"
+
+palette:
+  # Available: bw, grayscale, sepia, palette-16, palette-256
+  default: "palette-16"
+  # temperature: 0.7  # Optional: uncomment to override default
