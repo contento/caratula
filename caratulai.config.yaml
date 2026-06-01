@@ -6,8 +6,8 @@ cli:
   # Default tags for quick testing (comma-separated)
   default_tags: "prometheus,eagle,rock,fire,camel,lion,child"
 
-  # Seed for generation (1–2147483647)
-  seed: 1024
+  # Seed for generation (1–2147483647). Higher = more variation.
+  seed: 16384
 
 generation:
   # Canvas aspect ratio: square, 16:9, 4:3, 21:9, 9:16, 3:4
