@@ -35,6 +35,71 @@ program
   });
 
 program
+  .command("generate-svg")
+  .description("Generate SVG directly from concept tags (no extraction)")
+  .argument("<tags...>", "concept tags, e.g. star water travel")
+  .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
+  .option("--svg-provider <name>", "llm backend for SVG generation (echo | ollama | lmstudio | openrouter)")
+  .option("--svg-model <model>", "model for SVG generation (must be good at code generation)")
+  .option("--base-url <url>", "override the provider base URL")
+  .option("-o, --out <file>", "write SVG to this path instead of stdout")
+  .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
+  .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v))
+  .action(async (tags: string[], opts) => {
+    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
+    const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
+    const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
+    const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
+
+    const palette = getPalette(paletteId);
+    if (!palette) {
+      console.error(`Unknown palette "${paletteId}". Try: ${Object.keys(BUILTIN_PALETTES).join(", ")}`);
+      process.exitCode = 1;
+      return;
+    }
+
+    let svgProvider: LLMProvider;
+    try {
+      svgProvider = buildProvider({ ...opts, provider: svgProviderName, model: svgModelId, temperature });
+    } catch (err) {
+      console.error(err instanceof Error ? err.message : String(err));
+      process.exitCode = 1;
+      return;
+    }
+
+    const req: GenerationRequest = {
+      tags,
+      palette,
+      constraints: DEFAULT_CONSTRAINTS,
+      params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
+    };
+
+    let result;
+    try {
+      result = await generate(req, svgProvider);
+    } catch (err) {
+      console.error(`Generation failed via ${svgProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
+      if (svgProviderName === "ollama" || svgProviderName === "lmstudio") {
+        console.error(`Is the local server running? See docs/providers.md.`);
+      }
+      process.exitCode = 1;
+      return;
+    }
+
+    for (const issue of result.report.issues) {
+      console.error(`  fixed [${issue.rule}] ${issue.message}`);
+    }
+
+    if (opts.out) {
+      await mkdir(dirname(opts.out), { recursive: true });
+      await writeFile(opts.out, result.svg, "utf8");
+      console.error(`Wrote ${opts.out}`);
+    } else {
+      process.stdout.write(result.svg + "\n");
+    }
+  });
+
+program
   .command("generate")
   .description("Generate an SVG from concept tags, narrative text, or URL")
   .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text or --from-url is used)")
