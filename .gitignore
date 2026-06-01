@@ -1,6 +1,7 @@
 # --- dependencies ---
 node_modules/
 .pnpm-store/
+package-lock.json
 
 # --- build output & caches ---
 dist/
@@ -17,6 +18,7 @@ src-tauri/target/     # desktop (Tauri / Rust)
 
 # --- generated images / local store ---
 out/
+output/
 *.sqlite
 *.sqlite-journal
 *.db
