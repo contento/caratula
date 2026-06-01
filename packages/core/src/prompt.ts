@@ -23,7 +23,7 @@ export function buildPrompt(req: GenerationRequest): string {
   return [
     "You are caratulai, an alien image generator in the spirit of the Voyager Golden Record,",
     "the Pioneer plaque, and Carl Sagan's vision: create diagrams a spacefaring civilization would",
-    "understand. Render concepts as fundamental symbols — minimalist but substantive, never childish.",
+    "understand. Render concepts as rich, substantive symbols — elegant and sophisticated, never simplistic.",
     "",
     `Concept tags: ${tags.join(", ")}.`,
     "",
@@ -32,12 +32,13 @@ export function buildPrompt(req: GenerationRequest): string {
     `- Use ONLY these elements: ${primitives}.`,
     `- Use ONLY these colors (fill/stroke), exactly as written: ${colorList}.`,
     "- No gradients, no filters, no images, no rainbows, no ornament (no rococo/baroque).",
-    "- Use enough elements (20–40) to convey meaningful structure. Simple lines, arcs, diagonals, circles, paths.",
-    `- At most ${constraints.maxElements} drawable elements.`,
+    `- Use MANY elements (30–${constraints.maxElements}) to create visual depth and complexity. Dense, layered composition.`,
+    "- Combine: paths, lines, circles, polygons, arcs. Overlap shapes. Create intricate patterns and relationships.",
+    `- Maximum ${constraints.maxElements} drawable elements — aim for at least 40 to convey meaningful substance.`,
     constraints.maxTextElements === 0
       ? "- No text at all."
-      : `- At most ${constraints.maxTextElements} short text label(s) for clarity.`,
-    "- The image must read as elegant and symbolic, with quiet sophistication — a message in a bottle.",
+      : `- At most ${constraints.maxTextElements} short text label(s).`,
+    "- The image must convey MEANING and COMPLEXITY: a message from Earth to unknown intelligences.",
     "",
     "Respond with the raw SVG only — no markdown fences, no commentary.",
   ].join("\n");

@@ -9,11 +9,11 @@ const UNRESTRICTED_PRIMITIVES = [
   "use", "image", "text", "tspan", "a", "switch"
 ];
 
-/** Default aesthetic constraints: minimalist but substantive (Voyager Golden Record style). */
+/** Default aesthetic constraints: rich, substantive, meaningful (Voyager Golden Record style). */
 export const DEFAULT_CONSTRAINTS: Constraints = {
   allowedPrimitives: UNRESTRICTED_PRIMITIVES,
-  maxElements: 48,
-  maxTextElements: 2,
+  maxElements: 60,
+  maxTextElements: 0,
   width: 512,
   height: 512,
 };
@@ -22,8 +22,8 @@ export const DEFAULT_CONSTRAINTS: Constraints = {
 export function createConstraints(allowAllShapes: boolean = true): Constraints {
   return {
     allowedPrimitives: allowAllShapes ? UNRESTRICTED_PRIMITIVES : RESTRICTED_PRIMITIVES,
-    maxElements: 48,
-    maxTextElements: 2,
+    maxElements: 60,
+    maxTextElements: 0,
     width: 512,
     height: 512,
   };
