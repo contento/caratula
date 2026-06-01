@@ -167,7 +167,28 @@ program
     if (outPath) {
       await mkdir(dirname(outPath), { recursive: true });
       await writeFile(outPath, result.svg, "utf8");
+
+      // Save log with generation parameters
+      const logPath = outPath.replace(/\.svg$/, ".log");
+      const logContent = `Generated: ${new Date().toISOString()}
+SVG File: ${outPath}
+
+Parameters:
+  Tags: ${finalTags.join(", ")}
+  Palette: ${paletteId}
+  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
+  Canvas: ${width}x${height}
+  SVG Provider: ${svgProviderName}
+  SVG Model: ${svgModelId || svgProvider.models[0]}
+  Temperature: ${temperature}
+  Seed: ${opts.seed}
+
+Validation Issues Fixed:
+${result.report.issues.length > 0 ? result.report.issues.map(i => `  [${i.rule}] ${i.message}`).join("\n") : "  (none)"}
+`;
+      await writeFile(logPath, logContent, "utf8");
       console.error(`Wrote ${outPath}`);
+      console.error(`Logged ${logPath}`);
     } else {
       process.stdout.write(result.svg + "\n");
     }
@@ -350,7 +371,34 @@ program
     if (outPath) {
       await mkdir(dirname(outPath), { recursive: true });
       await writeFile(outPath, result.svg, "utf8");
+
+      // Save log with generation parameters
+      const logPath = outPath.replace(/\.svg$/, ".log");
+      const sourceInfo = opts.fromUrl ? `URL: ${opts.fromUrl}` : opts.fromText ? `Text: ${opts.fromText.substring(0, 100)}...` : `Tags: ${finalTags.join(", ")}`;
+      const logContent = `Generated: ${new Date().toISOString()}
+SVG File: ${outPath}
+
+Source:
+  ${sourceInfo}
+
+Parameters:
+  Final Tags: ${finalTags.join(", ")}
+  Palette: ${paletteId}
+  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
+  Canvas: ${width}x${height}
+  Text Provider: ${textProviderName}
+  Text Model: ${textModelId || textProvider.models[0]}
+  SVG Provider: ${svgProviderName}
+  SVG Model: ${svgModelId || svgProvider.models[0]}
+  Temperature: ${temperature}
+  Seed: ${opts.seed}
+
+Validation Issues Fixed:
+${result.report.issues.length > 0 ? result.report.issues.map(i => `  [${i.rule}] ${i.message}`).join("\n") : "  (none)"}
+`;
+      await writeFile(logPath, logContent, "utf8");
       console.error(`Wrote ${outPath}`);
+      console.error(`Logged ${logPath}`);
     } else {
       process.stdout.write(result.svg + "\n");
     }
