@@ -35,5 +35,5 @@ output:
 
 palette:
   # Available: bw, grayscale, sepia, palette-16, palette-256
-  default: "palette-16"
+  default: "palette-256"
   # temperature: 0.7  # Optional: uncomment to override default

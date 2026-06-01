@@ -110,7 +110,7 @@ program
       return;
     }
 
-    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
+    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "palette-256");
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
     const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
     const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
@@ -223,7 +223,7 @@ program
   .option("--from-url <url>", "fetch text from a URL and extract concept tags from it")
   .action(async (tags: string[], opts) => {
     // Resolve config: CLI flags > CARATULAI_* env vars > built-in defaults
-    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
+    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "palette-256");
 
     // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > default
     let width = 512, height = 512;
