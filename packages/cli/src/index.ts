@@ -78,7 +78,13 @@ program
     try {
       result = await generate(req, svgProvider);
     } catch (err) {
-      console.error(`Generation failed via ${svgProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error(`Generation failed via ${svgProvider.name}:`);
+      console.error(`  ${errorMsg}`);
+      if (svgProviderName === "openrouter") {
+        console.error(`  Check: API key valid? Rate limited? Model exists?`);
+        console.error(`  API Key: ${process.env.OPENROUTER_API_KEY ? "set" : "NOT SET"}`);
+      }
       if (svgProviderName === "ollama" || svgProviderName === "lmstudio") {
         console.error(`Is the local server running? See docs/providers.md.`);
       }
@@ -238,7 +244,13 @@ program
     try {
       result = await generate(req, svgProvider);
     } catch (err) {
-      console.error(`Generation failed via ${svgProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error(`Generation failed via ${svgProvider.name}:`);
+      console.error(`  ${errorMsg}`);
+      if (svgProviderName === "openrouter") {
+        console.error(`  Check: API key valid? Rate limited? Model exists?`);
+        console.error(`  API Key: ${process.env.OPENROUTER_API_KEY ? "set" : "NOT SET"}`);
+      }
       if (svgProviderName === "ollama" || svgProviderName === "lmstudio") {
         console.error(`Is the local server running? See docs/providers.md.`);
       }
