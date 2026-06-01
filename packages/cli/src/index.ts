@@ -4,6 +4,7 @@ import { dirname } from "node:path";
 import { Command } from "commander";
 import {
   generate,
+  extractTags,
   DEFAULT_CONSTRAINTS,
   getPalette,
   BUILTIN_PALETTES,
@@ -30,8 +31,8 @@ program
 
 program
   .command("generate")
-  .description("Generate an SVG from concept tags")
-  .argument("<tags...>", "concept tags, e.g. star water travel")
+  .description("Generate an SVG from concept tags or narrative text")
+  .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text is used)")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)", "bw")
   .option("-P, --provider <name>", "llm backend: echo | ollama | lmstudio | openrouter", "echo")
   .option("-m, --model <model>", "model id (provider-specific default)")
@@ -39,7 +40,15 @@ program
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
   .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v), 0.7)
+  .option("--from-text <text>", "extract concept tags from narrative text instead of using positional tags")
   .action(async (tags: string[], opts) => {
+    // Validate that either tags or --from-text is provided.
+    if ((!tags || tags.length === 0) && !opts.fromText) {
+      console.error("Error: provide either positional tags or --from-text <text>");
+      process.exitCode = 1;
+      return;
+    }
+
     const palette = getPalette(opts.palette);
     if (!palette) {
       console.error(`Unknown palette "${opts.palette}". Try: ${Object.keys(BUILTIN_PALETTES).join(", ")}`);
@@ -56,8 +65,25 @@ program
       return;
     }
 
+    // Extract tags from text if --from-text is provided; otherwise use positional tags.
+    let finalTags = tags || [];
+    if (opts.fromText) {
+      try {
+        finalTags = await extractTags(opts.fromText, provider, {
+          model: provider.models[0] ?? opts.provider,
+          temperature: opts.temperature,
+          seed: opts.seed,
+        });
+        console.error(`Extracted concepts: ${finalTags.join(", ")}`);
+      } catch (err) {
+        console.error(`Extraction failed: ${err instanceof Error ? err.message : String(err)}`);
+        process.exitCode = 1;
+        return;
+      }
+    }
+
     const req: GenerationRequest = {
-      tags,
+      tags: finalTags,
       palette,
       constraints: DEFAULT_CONSTRAINTS,
       params: { model: provider.models[0] ?? opts.provider, temperature: opts.temperature, seed: opts.seed },
