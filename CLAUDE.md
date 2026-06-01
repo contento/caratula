@@ -20,6 +20,16 @@ This project has a knowledge graph at `graphify-out/`.
 - After changing code, run `graphify update .` (AST-only, no API cost) to keep the graph current.
 - Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review.
 
+## Input pipeline: ontology at the root
+
+- **Ontology is the core contract.** All input sources (direct tags, images, narrative text) must be
+  converted to an ontology (a set of simple concept tags) before image generation.
+- **Image input** → extract visual concepts → ontology tags.
+- **Narrative text** → extract core concepts → ontology tags.
+- **Direct tags** → validate and pass through as ontology.
+- The generated image is **always driven by the final ontology**, never by the original narrative or image.
+  This ensures predictable, tag-focused output that respects aesthetic constraints.
+
 ## Aesthetic guardrails (these are requirements, not taste)
 
 - **Vector first** — SVG is the default output; raster/PDF are exports.

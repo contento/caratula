@@ -31,7 +31,8 @@ exists to make them.
 
 ## Principles
 
-- **Tags, not stories.** Input is an ontology of simple concepts, not prose prompts.
+- **Tags, not stories.** Core processing is an ontology of simple concepts, not prose prompts.
+  When provided with an image or narrative text, the system extracts the ontology first before generating.
 - **Vector first.** SVG is the native output; raster/PDF are exports.
 - **Fundamental palettes only.** B/W, sepia, grayscale, 16-color, 256-color — always restrained.
   **No rainbows. No rococo. No baroque.**
