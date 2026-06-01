@@ -3,9 +3,10 @@ import { buildPrompt, SYSTEM_PROMPT } from "./prompt.js";
 import { BW } from "./palettes.js";
 import { DEFAULT_CONSTRAINTS } from "./constraints.js";
 import type { GenerationRequest } from "./types.js";
+import { DEFAULT_CONCEPTS } from "./test-ontology.js";
 
 const req = (over: Partial<GenerationRequest> = {}): GenerationRequest => ({
-  tags: ["star", "water"],
+  tags: [DEFAULT_CONCEPTS.star, DEFAULT_CONCEPTS.water],
   palette: BW,
   constraints: DEFAULT_CONSTRAINTS,
   params: { model: "m", temperature: 0.5, seed: 1 },
@@ -15,8 +16,8 @@ const req = (over: Partial<GenerationRequest> = {}): GenerationRequest => ({
 describe("buildPrompt", () => {
   it("includes the concept tags", () => {
     const p = buildPrompt(req());
-    expect(p).toContain("star");
-    expect(p).toContain("water");
+    expect(p).toContain(DEFAULT_CONCEPTS.star);
+    expect(p).toContain(DEFAULT_CONCEPTS.water);
   });
 
   it("lists every palette color verbatim", () => {

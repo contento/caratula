@@ -3,6 +3,7 @@ import { generate, generateVariations } from "./generate.js";
 import { BW, SEPIA } from "./palettes.js";
 import { DEFAULT_CONSTRAINTS } from "./constraints.js";
 import type { GenerationParams, GenerationRequest, LLMProvider } from "./types.js";
+import { DEFAULT_CONCEPTS } from "./test-ontology.js";
 
 /** Records what it was asked and returns a fixed (messy) SVG. */
 class RecordingProvider implements LLMProvider {
@@ -17,7 +18,7 @@ class RecordingProvider implements LLMProvider {
 }
 
 const req = (over: Partial<GenerationRequest> = {}): GenerationRequest => ({
-  tags: ["moon"],
+  tags: [DEFAULT_CONCEPTS.moon],
   palette: BW,
   constraints: DEFAULT_CONSTRAINTS,
   params: { model: "rec-1", temperature: 0.7, seed: 0 },
@@ -51,7 +52,7 @@ describe("generateVariations", () => {
     const provider = new RecordingProvider();
     const results = await generateVariations(
       {
-        tags: ["sun"],
+        tags: [DEFAULT_CONCEPTS.sun],
         palettes: [BW, SEPIA],
         constraints: DEFAULT_CONSTRAINTS,
         baseParams: { model: "rec-1", temperature: 0.7 },
@@ -68,7 +69,7 @@ describe("generateVariations", () => {
     const provider = new RecordingProvider();
     const results = await generateVariations(
       {
-        tags: ["sun"],
+        tags: [DEFAULT_CONCEPTS.sun],
         palettes: [BW, SEPIA],
         constraints: DEFAULT_CONSTRAINTS,
         baseParams: { model: "rec-1", temperature: 0.7 },

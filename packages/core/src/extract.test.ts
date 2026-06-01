@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import type { LLMProvider, GenerationParams } from "./types.js";
 import { buildExtractionPrompt, extractTags, EXTRACTION_SYSTEM_PROMPT } from "./extract.js";
+import { DEFAULT_CONCEPTS } from "./test-ontology.js";
 
 class RecordingProvider implements LLMProvider {
   readonly name = "recording";
@@ -36,20 +37,20 @@ describe("extract", () => {
   describe("extractTags", () => {
     it("parses comma-separated response", async () => {
       const provider = new RecordingProvider();
-      provider.response = "star, water, ship";
+      provider.response = `${DEFAULT_CONCEPTS.star}, ${DEFAULT_CONCEPTS.water}, ${DEFAULT_CONCEPTS.moon}`;
 
       const tags = await extractTags("test input", provider, { model: "test" });
 
-      expect(tags).toEqual(["star", "water", "ship"]);
+      expect(tags).toEqual([DEFAULT_CONCEPTS.star, DEFAULT_CONCEPTS.water, DEFAULT_CONCEPTS.moon]);
     });
 
     it("parses newline-separated response", async () => {
       const provider = new RecordingProvider();
-      provider.response = "star\nwater\nship";
+      provider.response = `${DEFAULT_CONCEPTS.star}\n${DEFAULT_CONCEPTS.water}\n${DEFAULT_CONCEPTS.moon}`;
 
       const tags = await extractTags("test input", provider, { model: "test" });
 
-      expect(tags).toEqual(["star", "water", "ship"]);
+      expect(tags).toEqual([DEFAULT_CONCEPTS.star, DEFAULT_CONCEPTS.water, DEFAULT_CONCEPTS.moon]);
     });
 
     it("lowercases tags", async () => {

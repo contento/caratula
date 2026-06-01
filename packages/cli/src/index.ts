@@ -18,6 +18,47 @@ import { loadDotEnv, resolveOpt } from "./config.js";
 // Load .env variables before parsing CLI flags
 await loadDotEnv();
 
+/** Generate timestamped filename: yyyyMMdd_HHmmssSSS.svg */
+function generateTimestampFilename(dir: string): string {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const MM = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const HH = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+  const SSS = String(now.getMilliseconds()).padStart(3, "0");
+  const filename = `${yyyy}${MM}${dd}_${HH}${mm}${ss}${SSS}.svg`;
+  return `${dir}/${filename}`;
+}
+
+/** Aspect ratio presets. */
+const RATIO_PRESETS: Record<string, [number, number]> = {
+  square: [512, 512],
+  "1:1": [512, 512],
+  "16:9": [960, 540],
+  "9:16": [540, 960],
+  "4:3": [640, 480],
+  "3:4": [480, 640],
+  "21:9": [1024, 438],
+  "9:21": [438, 1024],
+};
+
+function resolveRatio(ratioStr: string | undefined): [number, number] {
+  if (!ratioStr) return [512, 512];
+  const preset = RATIO_PRESETS[ratioStr.toLowerCase()];
+  if (preset) return preset;
+  // Try parsing custom ratio like "16:9"
+  const match = ratioStr.match(/^(\d+):(\d+)$/);
+  if (match && match[1] && match[2]) {
+    const w = Number(match[1]);
+    const h = Number(match[2]);
+    const scale = 512 / w;
+    return [Math.round(w * scale), Math.round(h * scale)];
+  }
+  return [512, 512];
+}
+
 const program = new Command();
 
 program
@@ -37,19 +78,44 @@ program
 program
   .command("generate-svg")
   .description("Generate SVG directly from concept tags (no extraction)")
-  .argument("<tags...>", "concept tags, e.g. star water travel")
+  .argument("[tags...]", "concept tags (e.g. star water travel), or use CARATULAI_DEFAULT_TAGS from .env")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
   .option("--svg-provider <name>", "llm backend for SVG generation (echo | ollama | lmstudio | openrouter)")
   .option("--svg-model <model>", "model for SVG generation (must be good at code generation)")
   .option("--base-url <url>", "override the provider base URL")
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
-  .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
+  .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 1)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v))
+  .option("--ratio <preset>", "aspect ratio preset: square, 16:9, 4:3, 21:9, 9:16, 3:4, or custom like 16:9")
+  .option("--width <n>", "canvas width (overrides --ratio)", (v) => parseInt(v, 10))
+  .option("--height <n>", "canvas height (overrides --ratio)", (v) => parseInt(v, 10))
   .action(async (tags: string[], opts) => {
+    // Use provided tags or fall back to CARATULAI_DEFAULT_TAGS from env
+    const finalTags = (tags && tags.length > 0) ? tags : (process.env.CARATULAI_DEFAULT_TAGS?.split(",").map(t => t.trim()) || []);
+
+    // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > default
+    let width = 512, height = 512;
+    if (opts.width || opts.height) {
+      width = opts.width || 512;
+      height = opts.height || 512;
+    } else {
+      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || "16:9";
+      [width, height] = resolveRatio(ratioOpt);
+    }
+
+    if (!finalTags || finalTags.length === 0) {
+      console.error("Error: provide tags or set CARATULAI_DEFAULT_TAGS in .env");
+      process.exitCode = 1;
+      return;
+    }
+
     const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
     const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
     const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
+
+    console.error(`[DEBUG] SVG: ${svgProviderName}/${svgModelId || "(default)"}`);
+
 
     const palette = getPalette(paletteId);
     if (!palette) {
@@ -68,9 +134,9 @@ program
     }
 
     const req: GenerationRequest = {
-      tags,
+      tags: finalTags,
       palette,
-      constraints: DEFAULT_CONSTRAINTS,
+      constraints: { ...DEFAULT_CONSTRAINTS, width, height },
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
     };
 
@@ -96,10 +162,12 @@ program
       console.error(`  fixed [${issue.rule}] ${issue.message}`);
     }
 
-    if (opts.out) {
-      await mkdir(dirname(opts.out), { recursive: true });
-      await writeFile(opts.out, result.svg, "utf8");
-      console.error(`Wrote ${opts.out}`);
+    const outPath = opts.out || (process.env.CARATULAI_AUTO_SAVE_DIR ? generateTimestampFilename(process.env.CARATULAI_AUTO_SAVE_DIR) : null);
+
+    if (outPath) {
+      await mkdir(dirname(outPath), { recursive: true });
+      await writeFile(outPath, result.svg, "utf8");
+      console.error(`Wrote ${outPath}`);
     } else {
       process.stdout.write(result.svg + "\n");
     }
@@ -118,13 +186,26 @@ program
   .option("--image-model <model>", "model for image reading [future: M6]")
   .option("--base-url <url>", "override the provider base URL")
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
-  .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
+  .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 1)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v))
+  .option("--ratio <preset>", "aspect ratio preset: square, 16:9, 4:3, 21:9, 9:16, 3:4, or custom like 16:9")
+  .option("--width <n>", "canvas width (overrides --ratio)", (v) => parseInt(v, 10))
+  .option("--height <n>", "canvas height (overrides --ratio)", (v) => parseInt(v, 10))
   .option("--from-text <text>", "extract concept tags from narrative text")
   .option("--from-url <url>", "fetch text from a URL and extract concept tags from it")
   .action(async (tags: string[], opts) => {
     // Resolve config: CLI flags > CARATULAI_* env vars > built-in defaults
     const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
+
+    // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > default
+    let width = 512, height = 512;
+    if (opts.width || opts.height) {
+      width = opts.width || 512;
+      height = opts.height || 512;
+    } else {
+      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || "16:9";
+      [width, height] = resolveRatio(ratioOpt);
+    }
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
 
     // Text model (extraction from narrative text)
@@ -134,6 +215,8 @@ program
     // SVG model (generation from tags)
     const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
     const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
+
+    console.error(`[DEBUG] TEXT: ${textProviderName}/${textModelId || "(default)"}  SVG: ${svgProviderName}/${svgModelId || "(default)"}`);
 
     // Image model (reading images - future: M6)
     const imageProviderName = resolveOpt(opts.imageProvider, "CARATULAI_IMAGE_PROVIDER", undefined);
@@ -236,7 +319,7 @@ program
     const req: GenerationRequest = {
       tags: finalTags,
       palette,
-      constraints: DEFAULT_CONSTRAINTS,
+      constraints: { ...DEFAULT_CONSTRAINTS, width, height },
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
     };
 
@@ -262,10 +345,12 @@ program
       console.error(`  fixed [${issue.rule}] ${issue.message}`);
     }
 
-    if (opts.out) {
-      await mkdir(dirname(opts.out), { recursive: true });
-      await writeFile(opts.out, result.svg, "utf8");
-      console.error(`Wrote ${opts.out}`);
+    const outPath = opts.out || (process.env.CARATULAI_AUTO_SAVE_DIR ? generateTimestampFilename(process.env.CARATULAI_AUTO_SAVE_DIR) : null);
+
+    if (outPath) {
+      await mkdir(dirname(outPath), { recursive: true });
+      await writeFile(outPath, result.svg, "utf8");
+      console.error(`Wrote ${outPath}`);
     } else {
       process.stdout.write(result.svg + "\n");
     }
