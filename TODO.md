@@ -102,6 +102,12 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 > of the LLM-SVG pipeline: a vision model reads the image and emits constrained SVG, which then
 > runs through the same validator/sanitizer.
 
+### Image input (TODO)
+
+- [ ] `--from-image <path>`: accept local image file, extract visual concepts
+- [ ] `--from-image-url <url>`: fetch remote image, extract visual concepts
+- [ ] Vision provider interface (multimodal: `extractConceptsFromImage(image, provider)`)
+
 ### Image extraction (ontology from image)
 
 - [ ] Vision provider interface (multimodal: `extractConceptsFromImage(image, provider)`)

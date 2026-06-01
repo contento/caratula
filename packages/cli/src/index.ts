@@ -39,9 +39,11 @@ program
   .description("Generate an SVG from concept tags, narrative text, or URL")
   .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text or --from-url is used)")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
-  .option("-P, --provider <name>", "llm backend: echo | ollama | lmstudio | openrouter")
-  .option("-m, --model <model>", "model id (provider-specific default)")
+  .option("-P, --provider <name>", "llm backend for generation: echo | ollama | lmstudio | openrouter")
+  .option("-m, --model <model>", "model id for generation (provider-specific default)")
   .option("--base-url <url>", "override the provider base URL")
+  .option("--extract-provider <name>", "llm backend for extraction (defaults to --provider)")
+  .option("--extract-model <model>", "model for extraction (defaults to --model)")
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
   .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v))
@@ -53,6 +55,8 @@ program
     const providerName = resolveOpt(opts.provider, "CARATULAI_PROVIDER", "echo");
     const modelId = resolveOpt(opts.model, "CARATULAI_MODEL", undefined);
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
+    const extractProviderName = resolveOpt(opts.extractProvider, "CARATULAI_EXTRACT_PROVIDER", providerName);
+    const extractModelId = resolveOpt(opts.extractModel, "CARATULAI_EXTRACT_MODEL", modelId);
 
     // Validate that either tags, --from-text, or --from-url is provided.
     const hasPositionalTags = tags && tags.length > 0;
@@ -69,13 +73,33 @@ program
       return;
     }
 
-    let provider: LLMProvider;
+    // Build generation provider
+    let generateProvider: LLMProvider;
     try {
-      provider = buildProvider({ ...opts, provider: providerName, model: modelId, temperature });
+      generateProvider = buildProvider({ ...opts, provider: providerName, model: modelId, temperature });
     } catch (err) {
       console.error(err instanceof Error ? err.message : String(err));
       process.exitCode = 1;
       return;
+    }
+
+    // Build extraction provider (or reuse generation provider if same)
+    let extractProvider: LLMProvider;
+    if (extractProviderName === providerName && extractModelId === modelId) {
+      extractProvider = generateProvider;
+    } else {
+      try {
+        extractProvider = buildProvider({
+          ...opts,
+          provider: extractProviderName,
+          model: extractModelId,
+          temperature,
+        });
+      } catch (err) {
+        console.error(err instanceof Error ? err.message : String(err));
+        process.exitCode = 1;
+        return;
+      }
     }
 
     // Resolve input source: --from-url → --from-text → positional tags
@@ -97,8 +121,8 @@ program
 
     if (sourceText) {
       try {
-        finalTags = await extractTags(sourceText, provider, {
-          model: modelId || provider.models[0],
+        finalTags = await extractTags(sourceText, extractProvider, {
+          model: extractModelId || extractProvider.models[0],
           temperature,
           seed: opts.seed,
         });
@@ -116,14 +140,14 @@ program
       tags: finalTags,
       palette,
       constraints: DEFAULT_CONSTRAINTS,
-      params: { model: modelId || provider.models[0], temperature, seed: opts.seed },
+      params: { model: modelId || generateProvider.models[0], temperature, seed: opts.seed },
     };
 
     let result;
     try {
-      result = await generate(req, provider);
+      result = await generate(req, generateProvider);
     } catch (err) {
-      console.error(`Generation failed via ${provider.name}: ${err instanceof Error ? err.message : String(err)}`);
+      console.error(`Generation failed via ${generateProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
       if (providerName === "ollama" || providerName === "lmstudio") {
         console.error(`Is the local server running? See docs/providers.md.`);
       }
