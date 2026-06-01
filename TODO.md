@@ -57,9 +57,19 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 > Goal: tags come from a real taxonomy, not free strings.
 
+### Ontology extraction layer (prerequisite)
+
+- [ ] Design: extraction contracts in `core` vs surfaces ([ONTOLOGY_EXTRACTION.md](docs/ONTOLOGY_EXTRACTION.md))
+- [ ] `core/extract.ts`: `extractConceptsFromText()` — LLM reduces narrative to tags
+- [ ] CLI: wire `--from-text` flag to extract before generation
+- [ ] `core/extract.ts`: `buildExtractionPrompt()` — what to ask the LLM
+- [ ] Test extraction: verify that "A starry ocean" → concepts like `["star", "water"]`
+
+### Taxonomy & resolution
+
 - [ ] Seed a first concept domain (SPEC open question #4)
 - [ ] Concept/tag model + relations (taxonomy)
-- [ ] Tag resolution: input → canonical concepts → prompt
+- [ ] Tag resolution: input → canonical concepts → prompt (use extracted tags + M3 taxonomy)
 - [ ] Optional RDF/Turtle export (could feed graphify)
 
 ---
@@ -92,13 +102,20 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 > of the LLM-SVG pipeline: a vision model reads the image and emits constrained SVG, which then
 > runs through the same validator/sanitizer.
 
+### Image extraction (ontology from image)
+
+- [ ] Vision provider interface (multimodal: `extractConceptsFromImage(image, provider)`)
+- [ ] `core/extract.ts`: vision extraction — image → tags (reuse extraction layer from M3)
+- [ ] Test extraction: verify that a photo → visual concepts
+
+### Caratulize command
+
 - [ ] Input restrictions: allowed formats (PNG/JPEG/WebP), max dimensions, max file size
-- [ ] Vision provider interface (multimodal: image + constraints → SVG)
 - [ ] `caratulai caratulize <image>` command (alias: `caratulizar`)
 - [ ] Reuse the validator pipeline (palette-snap, allowed primitives, complexity cap, no text)
 - [ ] Safety/content checks on uploads (reject unsupported or disallowed content)
 - [ ] Tune the "simplify, don't reproduce" prompt so output is a caratulai, not a tracing
-- Depends on: M1 (a real provider). Feasible to pull earlier once one vision model is wired.
+- Depends on: M1 (a real provider) + M3 extraction layer. Feasible to pull earlier once one vision model is wired.
 
 ---
 
