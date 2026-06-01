@@ -183,6 +183,9 @@ Parameters:
   Temperature: ${temperature}
   Seed: ${opts.seed}
 
+Prompt Sent:
+${result.prompt}
+
 Validation Issues Fixed:
 ${result.report.issues.length > 0 ? result.report.issues.map(i => `  [${i.rule}] ${i.message}`).join("\n") : "  (none)"}
 `;
@@ -392,6 +395,9 @@ Parameters:
   SVG Model: ${svgModelId || svgProvider.models[0]}
   Temperature: ${temperature}
   Seed: ${opts.seed}
+
+Prompt Sent:
+${result.prompt}
 
 Validation Issues Fixed:
 ${result.report.issues.length > 0 ? result.report.issues.map(i => `  [${i.rule}] ${i.message}`).join("\n") : "  (none)"}

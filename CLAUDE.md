@@ -32,11 +32,16 @@ This project has a knowledge graph at `graphify-out/`.
 
 ## Aesthetic guardrails (these are requirements, not taste)
 
+**Goal:** Voyager Golden Record aesthetic — sophisticated, minimalist (not childish), symbolic, elegant.
+Think Carl Sagan's vision: diagrams a spacefaring civilization would understand. NOT a children's book.
+
 - **Vector first** — SVG is the default output; raster/PDF are exports.
 - **Fundamental palettes only** — B/W, sepia, grayscale, 16, 256. **No rainbows, no rococo/baroque.**
-- **Simple lines** — line, arc, diagonal, basic shapes. Minimize element count.
-- **Little or no text** in generated images.
+- **Minimalist but rich** — use enough elements (20–40) to convey meaningful structure, not oversimplify to childishness.
+  Lines, arcs, diagonals, circles, paths encouraged. Complexity cap exists but is high enough for sophisticated forms.
+- **Restrained text** (0–2 labels ok) — labels should enhance, not dominate.
 - Generated images must pass the **validator/sanitizer** (palette-snap, allowed primitives, complexity cap).
+  *Note: current constraints are TOO restrictive (maxElements: 24 is too low). Relax to 40–60 for richer output.*
 - **Default to LLM-generates-SVG**, not diffusion. Diffusion is an opt-in mode only.
 
 ## Tech stack

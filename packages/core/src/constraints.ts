@@ -1,10 +1,10 @@
 import type { Constraints } from "./types.js";
 
-/** Default aesthetic constraints: simple lines, arcs, diagonals; no text. */
+/** Default aesthetic constraints: minimalist but substantive (Voyager Golden Record style). */
 export const DEFAULT_CONSTRAINTS: Constraints = {
   allowedPrimitives: ["path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g"],
-  maxElements: 24,
-  maxTextElements: 0,
+  maxElements: 48,
+  maxTextElements: 2,
   width: 512,
   height: 512,
 };
