@@ -12,6 +12,7 @@ import {
   type LLMProvider,
 } from "@caratulai/core";
 import { buildProvider } from "./provider-factory.js";
+import { fetchTextFromUrl } from "./fetch.js";
 
 const program = new Command();
 
@@ -31,8 +32,8 @@ program
 
 program
   .command("generate")
-  .description("Generate an SVG from concept tags or narrative text")
-  .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text is used)")
+  .description("Generate an SVG from concept tags, narrative text, or URL")
+  .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text or --from-url is used)")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)", "bw")
   .option("-P, --provider <name>", "llm backend: echo | ollama | lmstudio | openrouter", "echo")
   .option("-m, --model <model>", "model id (provider-specific default)")
@@ -40,11 +41,13 @@ program
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
   .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v), 0.7)
-  .option("--from-text <text>", "extract concept tags from narrative text instead of using positional tags")
+  .option("--from-text <text>", "extract concept tags from narrative text")
+  .option("--from-url <url>", "fetch text from a URL and extract concept tags from it")
   .action(async (tags: string[], opts) => {
-    // Validate that either tags or --from-text is provided.
-    if ((!tags || tags.length === 0) && !opts.fromText) {
-      console.error("Error: provide either positional tags or --from-text <text>");
+    // Validate that either tags, --from-text, or --from-url is provided.
+    const hasPositionalTags = tags && tags.length > 0;
+    if (!hasPositionalTags && !opts.fromText && !opts.fromUrl) {
+      console.error("Error: provide either positional tags, --from-text <text>, or --from-url <url>");
       process.exitCode = 1;
       return;
     }
@@ -65,11 +68,26 @@ program
       return;
     }
 
-    // Extract tags from text if --from-text is provided; otherwise use positional tags.
-    let finalTags = tags || [];
-    if (opts.fromText) {
+    // Resolve input source: --from-url → --from-text → positional tags
+    let finalTags: string[] = [];
+    let sourceText: string | null = null;
+
+    if (opts.fromUrl) {
       try {
-        finalTags = await extractTags(opts.fromText, provider, {
+        sourceText = await fetchTextFromUrl(opts.fromUrl);
+        console.error(`Fetched ${sourceText.length} chars from ${opts.fromUrl}`);
+      } catch (err) {
+        console.error(`Failed to fetch URL: ${err instanceof Error ? err.message : String(err)}`);
+        process.exitCode = 1;
+        return;
+      }
+    } else if (opts.fromText) {
+      sourceText = opts.fromText;
+    }
+
+    if (sourceText) {
+      try {
+        finalTags = await extractTags(sourceText, provider, {
           model: provider.models[0] ?? opts.provider,
           temperature: opts.temperature,
           seed: opts.seed,
@@ -80,6 +98,8 @@ program
         process.exitCode = 1;
         return;
       }
+    } else {
+      finalTags = tags || [];
     }
 
     const req: GenerationRequest = {
