@@ -6,6 +6,7 @@ import {
   generate,
   extractTags,
   DEFAULT_CONSTRAINTS,
+  createConstraints,
   getPalette,
   BUILTIN_PALETTES,
   type GenerationRequest,
@@ -133,10 +134,13 @@ program
       return;
     }
 
+    const allowAllShapes = process.env.CARATULAI_ALLOW_ALL_SHAPES !== "false";
+    const constraints = { ...createConstraints(allowAllShapes), width, height };
+
     const req: GenerationRequest = {
       tags: finalTags,
       palette,
-      constraints: { ...DEFAULT_CONSTRAINTS, width, height },
+      constraints,
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
     };
 
@@ -340,10 +344,13 @@ program
       finalTags = tags || [];
     }
 
+    const allowAllShapes = process.env.CARATULAI_ALLOW_ALL_SHAPES !== "false";
+    const constraints = { ...createConstraints(allowAllShapes), width, height };
+
     const req: GenerationRequest = {
       tags: finalTags,
       palette,
-      constraints: { ...DEFAULT_CONSTRAINTS, width, height },
+      constraints,
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
     };
 
