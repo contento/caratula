@@ -62,6 +62,17 @@ All-TypeScript monorepo (pnpm workspaces + Turborepo). See [ADR 0002](docs/decis
 
 <!-- TODO: commands to build, run, and test. -->
 
+## Configuration & Secrets
+
+- **caratulai.config.yaml** — configuration (models, tags, ratio, seed, palette, output dir)
+  - Committed to repo. Safe to share.
+  - Readable YAML format. Easy to customize.
+- **.env** — secrets only (API keys, local server URLs)
+  - Gitignored. Never committed.
+  - Copy .env.example, fill in your keys.
+  
+Separation of concerns: config is shareable, secrets are not.
+
 ## Guardrails
 
 - Don't invent scope or stack beyond SPEC.md — confirm choices that aren't recorded there.
