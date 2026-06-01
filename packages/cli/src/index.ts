@@ -39,11 +39,13 @@ program
   .description("Generate an SVG from concept tags, narrative text, or URL")
   .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text or --from-url is used)")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
-  .option("-P, --provider <name>", "llm backend for generation: echo | ollama | lmstudio | openrouter")
-  .option("-m, --model <model>", "model id for generation (provider-specific default)")
+  .option("--text-provider <name>", "llm backend for text extraction (echo | ollama | lmstudio | openrouter)")
+  .option("--text-model <model>", "model for text extraction")
+  .option("--svg-provider <name>", "llm backend for SVG generation (echo | ollama | lmstudio | openrouter)")
+  .option("--svg-model <model>", "model for SVG generation (must be good at code generation)")
+  .option("--image-provider <name>", "llm backend for image reading [future: M6]")
+  .option("--image-model <model>", "model for image reading [future: M6]")
   .option("--base-url <url>", "override the provider base URL")
-  .option("--extract-provider <name>", "llm backend for extraction (defaults to --provider)")
-  .option("--extract-model <model>", "model for extraction (defaults to --model)")
   .option("-o, --out <file>", "write SVG to this path instead of stdout")
   .option("-s, --seed <n>", "seed for variation", (v) => parseInt(v, 10), 0)
   .option("-t, --temperature <n>", "sampling temperature", (v) => parseFloat(v))
@@ -52,11 +54,19 @@ program
   .action(async (tags: string[], opts) => {
     // Resolve config: CLI flags > CARATULAI_* env vars > built-in defaults
     const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "bw");
-    const providerName = resolveOpt(opts.provider, "CARATULAI_PROVIDER", "echo");
-    const modelId = resolveOpt(opts.model, "CARATULAI_MODEL", undefined);
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
-    const extractProviderName = resolveOpt(opts.extractProvider, "CARATULAI_EXTRACT_PROVIDER", providerName);
-    const extractModelId = resolveOpt(opts.extractModel, "CARATULAI_EXTRACT_MODEL", modelId);
+
+    // Text model (extraction from narrative text)
+    const textProviderName = resolveOpt(opts.textProvider, "CARATULAI_TEXT_PROVIDER", "echo");
+    const textModelId = resolveOpt(opts.textModel, "CARATULAI_TEXT_MODEL", undefined);
+
+    // SVG model (generation from tags)
+    const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
+    const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
+
+    // Image model (reading images - future: M6)
+    const imageProviderName = resolveOpt(opts.imageProvider, "CARATULAI_IMAGE_PROVIDER", undefined);
+    const imageModelId = resolveOpt(opts.imageModel, "CARATULAI_IMAGE_MODEL", undefined);
 
     // Validate that either tags, --from-text, or --from-url is provided.
     const hasPositionalTags = tags && tags.length > 0;
@@ -73,26 +83,26 @@ program
       return;
     }
 
-    // Build generation provider
-    let generateProvider: LLMProvider;
+    // Build SVG generation provider
+    let svgProvider: LLMProvider;
     try {
-      generateProvider = buildProvider({ ...opts, provider: providerName, model: modelId, temperature });
+      svgProvider = buildProvider({ ...opts, provider: svgProviderName, model: svgModelId, temperature });
     } catch (err) {
       console.error(err instanceof Error ? err.message : String(err));
       process.exitCode = 1;
       return;
     }
 
-    // Build extraction provider (or reuse generation provider if same)
-    let extractProvider: LLMProvider;
-    if (extractProviderName === providerName && extractModelId === modelId) {
-      extractProvider = generateProvider;
+    // Build text extraction provider (or reuse SVG provider if same)
+    let textProvider: LLMProvider;
+    if (textProviderName === svgProviderName && textModelId === svgModelId) {
+      textProvider = svgProvider;
     } else {
       try {
-        extractProvider = buildProvider({
+        textProvider = buildProvider({
           ...opts,
-          provider: extractProviderName,
-          model: extractModelId,
+          provider: textProviderName,
+          model: textModelId,
           temperature,
         });
       } catch (err) {
@@ -101,6 +111,22 @@ program
         return;
       }
     }
+
+    // Image provider (for future M6: caratulize)
+    // TODO: implement image input support
+    // let imageProvider: LLMProvider;
+    // if (imageProviderName && imageModelId) {
+    //   try {
+    //     imageProvider = buildProvider({
+    //       ...opts,
+    //       provider: imageProviderName,
+    //       model: imageModelId,
+    //       temperature,
+    //     });
+    //   } catch (err) {
+    //     // image input not yet implemented
+    //   }
+    // }
 
     // Resolve input source: --from-url → --from-text → positional tags
     let finalTags: string[] = [];
@@ -121,8 +147,8 @@ program
 
     if (sourceText) {
       try {
-        finalTags = await extractTags(sourceText, extractProvider, {
-          model: extractModelId || extractProvider.models[0],
+        finalTags = await extractTags(sourceText, textProvider, {
+          model: textModelId || textProvider.models[0],
           temperature,
           seed: opts.seed,
         });
@@ -140,15 +166,15 @@ program
       tags: finalTags,
       palette,
       constraints: DEFAULT_CONSTRAINTS,
-      params: { model: modelId || generateProvider.models[0], temperature, seed: opts.seed },
+      params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
     };
 
     let result;
     try {
-      result = await generate(req, generateProvider);
+      result = await generate(req, svgProvider);
     } catch (err) {
-      console.error(`Generation failed via ${generateProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
-      if (providerName === "ollama" || providerName === "lmstudio") {
+      console.error(`Generation failed via ${svgProvider.name}: ${err instanceof Error ? err.message : String(err)}`);
+      if (svgProviderName === "ollama" || svgProviderName === "lmstudio") {
         console.error(`Is the local server running? See docs/providers.md.`);
       }
       process.exitCode = 1;
