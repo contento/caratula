@@ -1,6 +1,8 @@
 # Caratulai Configuration
 # See CLAUDE.md and README.md for full documentation
-# Secrets (API keys) go in .env — this file is for configuration only
+#
+# Secrets (API keys) → .env
+# Everything else → this file
 
 cli:
   # Default tags for quick testing (comma-separated)
