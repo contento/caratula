@@ -43,7 +43,7 @@ exists to make them.
 
 ## Image Generation Profiles
 
-Six aesthetic styles, each with distinct constraints and prompt tone. **All profiles enforce ZERO text elements.**
+Seven aesthetic styles, each with distinct constraints and prompt tone. **All profiles enforce ZERO text elements.**
 
 | Profile | Aesthetic | Palette | Max Elements | Shapes | Use Case |
 | --- | --- | --- | --- | --- | --- |
@@ -51,6 +51,7 @@ Six aesthetic styles, each with distinct constraints and prompt tone. **All prof
 | **picasso** | Single-line drawings | B/W | 20 | Fundamental only | Sophisticated, minimal, elegant |
 | **contento** | Rich, dense, layered | 256-color | 80 | All shapes + effects | Visual abundance, complexity |
 | **dictionary** | Vocabulary & icons | 256-color | 60 | All shapes + effects | Semantic visual library |
+| **freud** *(future)* | Layers of the psyche | Grayscale + sepia | 50–70 | All shapes | Unconscious drives, dream logic |
 | **jung** *(future)* | Archetypal symbols | 256-color | 50 | All shapes | Psychological/symbolic depth |
 | **nietzsche** *(future)* | Full ontology-driven | 256-color | Variable | All shapes | Philosophical/conceptual mapping |
 

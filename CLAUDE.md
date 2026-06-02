@@ -74,16 +74,24 @@ Separation of concerns: config is shareable, secrets are not.
 
 ## Image Generation Profiles
 
-Four profiles define aesthetic direction and constraints:
+Seven profiles across the aesthetic spectrum (four implemented, three in development):
+
+**Implemented:**
 
 - **sagan** (default) — Voyager Golden Record. Gold background (#d4af37), silver text/lines (#c0c0c0).
   Voyager record plate aesthetic: technical, minimal, profound.
-- **picasso** — Elegant, sophisticated lines. Minimal shapes. Single-line drawing style. (TBD)
+- **picasso** — Elegant, sophisticated lines. Minimal shapes. Single-line drawing style.
 - **contento** — Less restrained. Rich complexity, 80+ elements, all shapes allowed.
   Dense, layered, visually abundant.
-- **dictionary** — Dictionary-based generation. Uses visual vocabulary and pattern library. (TBD)
+- **dictionary** — Dictionary-based generation. Uses visual vocabulary and pattern library.
 
-Set via `generation.profile` in caratulai.config.yaml or `--profile sagan` on CLI (future).
+**In development:**
+
+- **freud** — Layers of the psyche. Grayscale + sepia, concentric structures for id/ego/superego.
+- **jung** — Archetypal symbols. Psychological/symbolic depth (shadow, anima, self, hero).
+- **nietzsche** — Full ontology-driven. Philosophical/conceptual mapping via concept hierarchies.
+
+Set via `generation.profile` in caratulai.config.yaml or `--profile sagan` on CLI.
 
 ## Guardrails
 

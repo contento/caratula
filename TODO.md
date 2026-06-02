@@ -35,11 +35,15 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [x] **Test suite** (Vitest): 69 tests across validator, palettes, prompt, generate, providers,
       model ladder, HTTP provider (mocked fetch), factories — coverage thresholds enforced (≥98%)
 - [x] Re-enable the CI `test` step (now runs with coverage gating)
-- [x] **Image generation profiles** (aesthetic styles — 4 of 6 done):
+- [x] **Image generation profiles** (aesthetic styles — 4 of 7 done):
   - [x] sagan — Voyager Golden Record (gold + silver)
   - [x] picasso — elegant lines, minimal (single-line B/W, 20 elements)
   - [x] contento — less restrained, 80+ shapes, dense composition
   - [x] dictionary — vocabulary-based patterns (256-color, 60 elements)
+  - [ ] **freud** — layers of the psyche (grayscale + sepia, concentric structures)
+    - [ ] Define id/ego/superego visual metaphors (nested layers)
+    - [ ] Map defense mechanisms and complexes to symbolic patterns
+    - [ ] Design prompt tone: dream-like introspection, unconscious drives, layered symbolism
   - [ ] **jung** — archetypal symbols (psychological/symbolic depth)
     - [ ] Define Jungian archetype vocabulary (shadow, anima, self, hero, etc.)
     - [ ] Map concepts to archetypal visual primitives
