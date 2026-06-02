@@ -19,6 +19,13 @@ generation:
   # false = restrict to fundamental shapes only
   allow_all_shapes: true
 
+  # Image profile/style: sagan | picasso | contento | dictionary
+  # - sagan: Voyager Golden Record (gold background, silver text/lines)
+  # - picasso: Picasso-inspired (elegant lines, minimal)
+  # - contento: Less restrained, rich complexity, many shapes
+  # - dictionary: Dictionary-based (uses image vocabulary/patterns)
+  profile: "sagan"
+
 models:
   # Text extraction (narrative → concept tags)
   text:
@@ -48,3 +55,29 @@ palette:
   # Available: bw, grayscale, sepia, palette-16, palette-256
   default: "palette-256"
   # temperature: 0.7  # Optional: uncomment to override default
+
+# Image generation profiles (styles)
+profiles:
+  sagan:
+    name: "Voyager Golden Record"
+    description: "Gold background, silver/white text and lines. Like the actual Voyager record plate."
+    palette: "palette-256"
+    background_color: "#d4af37"  # Gold
+    foreground_color: "#c0c0c0"  # Silver
+
+  picasso:
+    name: "Picasso"
+    description: "Elegant lines, minimal shapes, sophisticated. TBD: define aesthetic."
+    palette: "palette-256"
+
+  contento:
+    name: "Contento"
+    description: "Less restrained, more shapes, visual complexity. Rich and dense composition."
+    palette: "palette-256"
+    max_elements: 80
+    allow_all_shapes: true
+
+  dictionary:
+    name: "Dictionary"
+    description: "Dictionary-based image generation. Uses vocabulary of visual patterns and icons. TBD."
+    palette: "palette-256"

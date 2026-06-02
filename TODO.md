@@ -35,6 +35,11 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [x] **Test suite** (Vitest): 69 tests across validator, palettes, prompt, generate, providers,
       model ladder, HTTP provider (mocked fetch), factories — coverage thresholds enforced (≥98%)
 - [x] Re-enable the CI `test` step (now runs with coverage gating)
+- [ ] **Image generation profiles** (aesthetic styles):
+  - [x] sagan — Voyager Golden Record (gold + silver)
+  - [ ] picasso — elegant lines, minimal (TBD: define aesthetic + prompt)
+  - [ ] contento — less restrained, 80+ shapes, dense composition
+  - [ ] dictionary — vocabulary-based patterns (TBD: implement)
 - [ ] Verify against a live local model (Ollama/LM Studio) and tune the prompt
 - [ ] **Anthropic provider** (Claude — strongest at SVG), with prompt caching
 - [ ] Model ladder wiring (local first, escalate to remote)

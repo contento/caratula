@@ -41,6 +41,19 @@ exists to make them.
 - **Reproducible.** Every image stores the tags, palette, model, and parameters that made it.
 - **Simple chords.** A small set of familiar elements, arranged for feeling — not complexity.
 
+## Image Generation Profiles
+
+Four aesthetic styles for different contexts:
+
+| Profile | Aesthetic | Colors | Elements | Use Case |
+| --- | --- | --- | --- | --- |
+| **sagan** | Voyager Golden Record | Gold (#d4af37) + Silver | Minimal, technical | Cosmic, profound, archival |
+| **picasso** | Elegant lines, minimal | B/W, grayscale | Few shapes | Sophisticated, reductive |
+| **contento** | Rich, dense, layered | 256-color | 80+ shapes | Visual abundance, complex concepts |
+| **dictionary** | Vocabulary-based patterns | 256-color | Icons + patterns | Semantic visual library |
+
+Set in `caratulai.config.yaml` → `generation.profile` or CLI flag `--profile sagan`.
+
 ## Surfaces
 
 One core engine, four faces: **Web** · **TUI/CLI** · **Desktop** · **Backend** —

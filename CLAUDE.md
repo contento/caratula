@@ -72,6 +72,19 @@ All-TypeScript monorepo (pnpm workspaces + Turborepo). See [ADR 0002](docs/decis
   
 Separation of concerns: config is shareable, secrets are not.
 
+## Image Generation Profiles
+
+Four profiles define aesthetic direction and constraints:
+
+- **sagan** (default) — Voyager Golden Record. Gold background (#d4af37), silver text/lines (#c0c0c0).
+  Voyager record plate aesthetic: technical, minimal, profound.
+- **picasso** — Elegant, sophisticated lines. Minimal shapes. Single-line drawing style. (TBD)
+- **contento** — Less restrained. Rich complexity, 80+ elements, all shapes allowed.
+  Dense, layered, visually abundant.
+- **dictionary** — Dictionary-based generation. Uses visual vocabulary and pattern library. (TBD)
+
+Set via `generation.profile` in caratulai.config.yaml or `--profile sagan` on CLI (future).
+
 ## Guardrails
 
 - Don't invent scope or stack beyond SPEC.md — confirm choices that aren't recorded there.
