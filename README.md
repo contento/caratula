@@ -43,18 +43,20 @@ exists to make them.
 
 ## Image Generation Profiles
 
-Six aesthetic styles for different contexts:
+Six aesthetic styles, each with distinct constraints and prompt tone. **All profiles enforce ZERO text elements.**
 
-| Profile | Aesthetic | Colors | Elements | Use Case |
-| --- | --- | --- | --- | --- |
-| **sagan** | Voyager Golden Record | Gold (#d4af37) + Silver | Minimal, technical | Cosmic, profound, archival |
-| **picasso** | Elegant lines, minimal | B/W, grayscale | Few shapes | Sophisticated, reductive |
-| **contento** | Rich, dense, layered | 256-color | 80+ shapes | Visual abundance, complex concepts |
-| **dictionary** | Vocabulary-based patterns | 256-color | Icons + patterns | Semantic visual library |
-| **jung** *(future)* | Archetypal symbols | 256-color | 50+ shapes | Psychological/symbolic depth |
-| **nietzsche** *(future)* | Full ontology-driven | 256-color | Variable | Philosophical/conceptual mapping |
+| Profile | Aesthetic | Palette | Max Elements | Shapes | Use Case |
+| --- | --- | --- | --- | --- | --- |
+| **sagan** | Voyager Golden Record | Gold + Silver | 48 | Fundamental only | Cosmic, profound, archival |
+| **picasso** | Single-line drawings | B/W | 20 | Fundamental only | Sophisticated, minimal, elegant |
+| **contento** | Rich, dense, layered | 256-color | 80 | All shapes + effects | Visual abundance, complexity |
+| **dictionary** | Vocabulary & icons | 256-color | 60 | All shapes + effects | Semantic visual library |
+| **jung** *(future)* | Archetypal symbols | 256-color | 50 | All shapes | Psychological/symbolic depth |
+| **nietzsche** *(future)* | Full ontology-driven | 256-color | Variable | All shapes | Philosophical/conceptual mapping |
 
-Set in `caratulai.config.yaml` → `generation.profile` or CLI flag `--profile sagan`.
+**Text policy**: All profiles have `maxTextElements: 0` — **zero text in output**, enforced by validator and reinforced in prompts.
+
+**Usage**: Set in `caratulai.config.yaml` (`generation.profile: sagan`) or CLI (`--profile contento`).
 
 ## Surfaces
 
