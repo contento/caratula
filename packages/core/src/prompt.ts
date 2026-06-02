@@ -21,27 +21,28 @@ export function buildPrompt(req: GenerationRequest): string {
   const primitives = constraints.allowedPrimitives.join(", ");
 
   return [
-    "You are caratulai, an alien image generator in the spirit of the Voyager Golden Record,",
-    "the Pioneer plaque, and Carl Sagan's vision: create diagrams a spacefaring civilization would",
-    "understand. Render concepts as rich, substantive symbols — elegant and sophisticated, never simplistic.",
+    "Generate a SOPHISTICATED TECHNICAL DIAGRAM in the style of circuit schematics, astronomical charts,",
+    "and scientific notation. Think: Voyager Golden Record, technical blueprints, engineering diagrams.",
+    `Render ${tags.join(", ")} as a COMPLEX, DENSE, MATURE visual: intricate, layered, technical-looking.`,
+    "NEVER childish, simplistic, or cartoon-like. Aim for the sophistication of an engineering manual.",
     "",
     `Concept tags: ${tags.join(", ")}.`,
     "",
-    "Rules — follow ALL of them:",
-    `- Output a single valid SVG document, ${constraints.width}x${constraints.height}, nothing else.`,
-    `- Use ONLY these elements: ${primitives}.`,
-    `- Use ONLY these colors (fill/stroke), exactly as written: ${colorList}.`,
-    "- No gradients, no filters, no images, no rainbows, no ornament (no rococo/baroque).",
-    `- Use MANY elements (30–${constraints.maxElements}) to create visual depth and complexity. Dense, layered composition.`,
-    "- Use any SVG elements: paths, lines, circles, polygons, arcs, rectangles, groups, gradients, patterns, effects.",
-    "- Overlap shapes. Layer groups. Create intricate patterns, relationships, and visual complexity.",
-    "- Use gradients and patterns for richness. Create visual depth through layering and nesting.",
-    `- Maximum ${constraints.maxElements} drawable elements — aim for 40–60 for true substance.`,
+    "STRICT RULES:",
+    `- Output valid SVG only: ${constraints.width}x${constraints.height}. No markdown, no text, no commentary.`,
+    `- Elements: ${primitives}.`,
+    `- Colors ONLY: ${colorList}. Exact hex values. No deviations.`,
+    "- FORBIDDEN: gradients, filters, images, rainbows, ornament, anything decorative or childish.",
+    `- USE ${constraints.maxElements} elements AGGRESSIVELY. Fill the canvas. Layer shapes densely.`,
+    "- Create: overlapping polygons, nested groups, complex paths, repeating geometric patterns.",
+    "- Aim for visual DENSITY and COMPLEXITY — technical, not playful. Intricate webs of lines and shapes.",
+    "- Think: circuit board traces, star maps, molecular diagrams, geometric tessellations.",
+    `- Maximum ${constraints.maxElements} elements — use 50+ if possible. More complexity = more sophisticated.`,
     constraints.maxTextElements === 0
-      ? "- No text at all."
-      : `- At most ${constraints.maxTextElements} short text label(s).`,
-    "- The image must convey MEANING and COMPLEXITY: a message from Earth to unknown intelligences.",
+      ? "- ZERO text. Meaning comes from visual structure alone."
+      : `- At most ${constraints.maxTextElements} technical label(s).`,
+    "- The result must look MATURE, TECHNICAL, and SUBSTANTIAL — not like a children's drawing.",
     "",
-    "Respond with the raw SVG only — no markdown fences, no commentary.",
+    "Generate the SVG now:",
   ].join("\n");
 }
