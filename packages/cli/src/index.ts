@@ -95,21 +95,32 @@ program
   .option("--width <n>", "canvas width (overrides --ratio)", (v) => parseInt(v, 10))
   .option("--height <n>", "canvas height (overrides --ratio)", (v) => parseInt(v, 10))
   .action(async (tags: string[], opts) => {
-    // Use provided tags or fall back to CARATULAI_DEFAULT_TAGS from env
-    const finalTags = (tags && tags.length > 0) ? tags : (process.env.CARATULAI_DEFAULT_TAGS?.split(",").map(t => t.trim()) || []);
+    // Resolve tags: CLI args > env var > YAML config > error
+    let finalTags = tags && tags.length > 0 ? tags : [];
+    if (finalTags.length === 0) {
+      const envTags = process.env.CARATULAI_DEFAULT_TAGS?.split(",").map(t => t.trim());
+      if (envTags && envTags.length > 0) {
+        finalTags = envTags;
+      } else {
+        const yamlTags = (yamlConfig as any)?.cli?.default_tags?.split(",").map((t: string) => t.trim());
+        if (yamlTags && yamlTags.length > 0) {
+          finalTags = yamlTags;
+        }
+      }
+    }
 
-    // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > default
+    // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > YAML > default
     let width = 512, height = 512;
     if (opts.width || opts.height) {
       width = opts.width || 512;
       height = opts.height || 512;
     } else {
-      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || "16:9";
+      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || (yamlConfig as any)?.generation?.ratio || "16:9";
       [width, height] = resolveRatio(ratioOpt);
     }
 
     if (!finalTags || finalTags.length === 0) {
-      console.error("Error: provide tags or set CARATULAI_DEFAULT_TAGS in .env");
+      console.error("Error: provide tags, set CARATULAI_DEFAULT_TAGS env, or set cli.default_tags in caratulai.config.yaml");
       process.exitCode = 1;
       return;
     }
@@ -243,7 +254,7 @@ program
       width = opts.width || 512;
       height = opts.height || 512;
     } else {
-      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || "16:9";
+      const ratioOpt = opts.ratio || process.env.CARATULAI_RATIO || (yamlConfig as any)?.generation?.ratio || "16:9";
       [width, height] = resolveRatio(ratioOpt);
     }
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
