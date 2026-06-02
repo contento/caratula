@@ -183,7 +183,8 @@ program
       console.error(`  fixed [${issue.rule}] ${issue.message}`);
     }
 
-    const outPath = opts.out || (process.env.CARATULAI_AUTO_SAVE_DIR ? generateTimestampFilename(process.env.CARATULAI_AUTO_SAVE_DIR) : null);
+    const autoSaveDir = opts.out ? null : (process.env.CARATULAI_AUTO_SAVE_DIR || (yamlConfig as any)?.output?.auto_save_dir);
+    const outPath = opts.out || (autoSaveDir ? generateTimestampFilename(autoSaveDir) : null);
 
     if (outPath) {
       await mkdir(dirname(outPath), { recursive: true });
@@ -198,7 +199,7 @@ Parameters:
   Tags: ${finalTags.join(", ")}
   Profile: ${profileId}
   Palette: ${paletteId}
-  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
+  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || (yamlConfig as any)?.generation?.ratio || "16:9"}
   Canvas: ${width}x${height}
   SVG Provider: ${svgProviderName}
   SVG Model: ${svgModelId || svgProvider.models[0]}
@@ -399,7 +400,8 @@ program
       console.error(`  fixed [${issue.rule}] ${issue.message}`);
     }
 
-    const outPath = opts.out || (process.env.CARATULAI_AUTO_SAVE_DIR ? generateTimestampFilename(process.env.CARATULAI_AUTO_SAVE_DIR) : null);
+    const autoSaveDir = opts.out ? null : (process.env.CARATULAI_AUTO_SAVE_DIR || (yamlConfig as any)?.output?.auto_save_dir);
+    const outPath = opts.out || (autoSaveDir ? generateTimestampFilename(autoSaveDir) : null);
 
     if (outPath) {
       await mkdir(dirname(outPath), { recursive: true });
@@ -418,7 +420,7 @@ Parameters:
   Final Tags: ${finalTags.join(", ")}
   Profile: ${profileId}
   Palette: ${paletteId}
-  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
+  Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || (yamlConfig as any)?.generation?.ratio || "16:9"}
   Canvas: ${width}x${height}
   Text Provider: ${textProviderName}
   Text Model: ${textModelId || textProvider.models[0]}
