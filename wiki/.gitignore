@@ -1,0 +1,10 @@
+# Obsidian runtime state (not version controlled)
+.obsidian/workspace.json
+.obsidian/core-plugins.json
+.obsidian/community-plugins.json
+.obsidian/hotkeys.json
+
+# Local Obsidian cache
+.obsidian/cache/
+
+# Keep committed: app.json, appearance.json, graph.json (vault config)
