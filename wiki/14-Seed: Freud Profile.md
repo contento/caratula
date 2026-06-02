@@ -471,5 +471,5 @@ Tone: somber, introspective, slightly anxious
 - [[Jung Profile Seed]] — archetypal psychology (shadow, anima, self)
 - [[Nietzsche Profile Seed]] — genealogical philosophy and ontology
 - [[07-LLM and Ontology]] — how to prompt for psychological concept extraction
-- [[06-Ontology Seed]] — core visual and abstract concepts
+- [[06-Seed: Ontology]] — core visual and abstract concepts
 - [[17-Roadmap]] — M1 (profiling) and M9 (dictionary) timelines

@@ -25,7 +25,7 @@ Welcome to the caratulai knowledge base. caratulai is an **alien image generator
 ## Design & Architecture
 
 - [[17-Roadmap]] — M0–M10 milestones
-- [[06-Ontology Seed]] — foundational concept taxonomy (visual, abstract, relationships)
+- [[06-Seed: Ontology]] — foundational concept taxonomy (visual, abstract, relationships)
 - [[07-LLM and Ontology]] — how to express ontologies to LLMs; model specialization
 - [[design/01-Ontology Extraction]] — how input is normalized to an ontology
 - [[design/02-Dictionary Profile]] — the dictionary profile vision (Tier 2–4 composition)
