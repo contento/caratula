@@ -41,8 +41,16 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
   - [x] contento — less restrained, 80+ shapes, dense composition
   - [x] dictionary — vocabulary-based patterns (256-color, 60 elements)
 - [ ] Verify against a live local model (Ollama/LM Studio) and tune the prompt
+  - [ ] Test sagan profile with Ollama qwen2.5-coder or similar
+  - [ ] Test contento profile — verify 80-element density achievable
+  - [ ] Tune profile prompts if needed based on model behavior
 - [ ] **Anthropic provider** (Claude — strongest at SVG), with prompt caching
+  - [ ] Claude API integration (requires ANTHROPIC_API_KEY)
+  - [ ] Implement prompt caching for repeated profiles/concepts
+  - [ ] Benchmark against Grok-2 for quality vs cost
 - [ ] Model ladder wiring (local first, escalate to remote)
+  - [ ] Default: Ollama (free, local) → LM Studio (free, local) → OpenRouter (paid, remote)
+  - [ ] CLI: auto-retry with next model in ladder on failure
 
 ---
 
