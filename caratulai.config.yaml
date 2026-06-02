@@ -24,9 +24,10 @@ models:
     model: "deepseek/deepseek-v4-flash"
 
   # SVG generation (tags → SVG)
+  # Better models: x-ai/grok-2-1212 (technical), meta-llama/llama-3.1-70b-instruct (capable)
   svg:
     provider: "openrouter"
-    model: "openai/gpt-4o-mini"
+    model: "x-ai/grok-2-1212"
 
 output:
   # Auto-save directory for generated SVGs (with timestamp filenames)
