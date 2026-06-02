@@ -1,6 +1,6 @@
 # CLAUDE.md — AI working instructions
 
-Project: **caratulai** — an alien image generator. Concepts (tags/ontology) → simple **vector** images in fundamental palettes. **Full wiki:** [[wiki/Home]]
+Project: **caratulai** — an alien image generator. Concepts (tags/ontology) → simple **vector** images in fundamental palettes. **Full wiki:** [[wiki/00-Home]]
 
 ## Working agreement
 
