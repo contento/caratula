@@ -67,7 +67,9 @@ describe("sanitizeSvg — structure & primitives", () => {
 
   it("removes disallowed elements", () => {
     const raw = '<svg><script>alert(1)</script><image href="x"/><circle/></svg>';
-    const { svg, report } = sanitizeSvg(raw, BW, C());
+    // Use restricted constraints to test that disallowed primitives are removed
+    const restricted = C({ allowedPrimitives: ["path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g"] });
+    const { svg, report } = sanitizeSvg(raw, BW, restricted);
     expect(svg).not.toContain("<script>");
     expect(svg).not.toContain("<image");
     expect(svg).toContain("<circle");

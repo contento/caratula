@@ -33,16 +33,16 @@ describe("buildPrompt", () => {
 
   it("forbids text when maxTextElements is 0", () => {
     const p = buildPrompt(req({ constraints: { ...DEFAULT_CONSTRAINTS, maxTextElements: 0 } }));
-    expect(p).toContain("No text at all");
+    expect(p).toContain("ZERO text");
   });
 
   it("allows a labelled count when text is permitted", () => {
     const p = buildPrompt(req({ constraints: { ...DEFAULT_CONSTRAINTS, maxTextElements: 2 } }));
-    expect(p).toMatch(/At most 2 short text label/);
+    expect(p).toMatch(/At most 2 technical label/);
   });
 
   it("demands raw SVG only", () => {
-    expect(buildPrompt(req())).toMatch(/raw SVG only/i);
+    expect(buildPrompt(req())).toMatch(/valid SVG/i);
   });
 
   it("is deterministic", () => {
@@ -51,8 +51,8 @@ describe("buildPrompt", () => {
 });
 
 describe("SYSTEM_PROMPT", () => {
-  it("encodes the minimalism goal and raw-SVG contract", () => {
-    expect(SYSTEM_PROMPT).toMatch(/simplest\s+possible/i);
+  it("encodes the core contract and raw-SVG output", () => {
     expect(SYSTEM_PROMPT).toMatch(/raw SVG/i);
+    expect(SYSTEM_PROMPT).toMatch(/alien image generator/i);
   });
 });

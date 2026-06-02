@@ -9,15 +9,18 @@ import {
   createConstraints,
   getPalette,
   BUILTIN_PALETTES,
+  getProfile,
   type GenerationRequest,
   type LLMProvider,
+  type ProfileId,
 } from "@caratulai/core";
 import { buildProvider } from "./provider-factory.js";
 import { fetchTextFromUrl } from "./fetch.js";
-import { loadDotEnv, resolveOpt } from "./config.js";
+import { loadDotEnv, loadYamlConfig, resolveOpt } from "./config.js";
 
-// Load .env variables before parsing CLI flags
+// Load .env variables and YAML config before parsing CLI flags
 await loadDotEnv();
+const yamlConfig = await loadYamlConfig();
 
 /** Generate timestamped filename: yyyyMMdd_HHmmssSSS.svg */
 function generateTimestampFilename(dir: string): string {
@@ -81,6 +84,7 @@ program
   .description("Generate SVG directly from concept tags (no extraction)")
   .argument("[tags...]", "concept tags (e.g. star water travel), or use CARATULAI_DEFAULT_TAGS from .env")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
+  .option("--profile <id>", "image profile: sagan | picasso | contento | dictionary")
   .option("--svg-provider <name>", "llm backend for SVG generation (echo | ollama | lmstudio | openrouter)")
   .option("--svg-model <model>", "model for SVG generation (must be good at code generation)")
   .option("--base-url <url>", "override the provider base URL")
@@ -110,13 +114,15 @@ program
       return;
     }
 
-    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "palette-256");
+    // Resolve profile: CLI flag > env > YAML config > default
+    const profileId = (opts.profile ?? process.env.CARATULAI_PROFILE ?? (yamlConfig as any)?.generation?.profile ?? "sagan") as ProfileId;
+    const profileDef = getProfile(profileId);
+    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", profileDef.paletteId);
     const temperature = resolveOpt(opts.temperature, "CARATULAI_TEMPERATURE", 0.7, parseFloat);
     const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
     const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
 
-    console.error(`[DEBUG] SVG: ${svgProviderName}/${svgModelId || "(default)"}`);
-
+    console.error(`[DEBUG] SVG: ${svgProviderName}/${svgModelId || "(default)"}  Profile: ${profileId}`);
 
     const palette = getPalette(paletteId);
     if (!palette) {
@@ -134,14 +140,14 @@ program
       return;
     }
 
-    const allowAllShapes = process.env.CARATULAI_ALLOW_ALL_SHAPES !== "false";
-    const constraints = { ...createConstraints(allowAllShapes), width, height };
+    const constraints = { ...createConstraints(profileDef), width, height };
 
     const req: GenerationRequest = {
       tags: finalTags,
       palette,
       constraints,
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
+      profile: profileId,
     };
 
     let result;
@@ -179,6 +185,7 @@ SVG File: ${outPath}
 
 Parameters:
   Tags: ${finalTags.join(", ")}
+  Profile: ${profileId}
   Palette: ${paletteId}
   Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
   Canvas: ${width}x${height}
@@ -206,6 +213,7 @@ program
   .description("Generate an SVG from concept tags, narrative text, or URL")
   .argument("[tags...]", "concept tags, e.g. star water travel (required unless --from-text or --from-url is used)")
   .option("-p, --palette <id>", "palette id (see `caratulai palettes`)")
+  .option("--profile <id>", "image profile: sagan | picasso | contento | dictionary")
   .option("--text-provider <name>", "llm backend for text extraction (echo | ollama | lmstudio | openrouter)")
   .option("--text-model <model>", "model for text extraction")
   .option("--svg-provider <name>", "llm backend for SVG generation (echo | ollama | lmstudio | openrouter)")
@@ -222,8 +230,12 @@ program
   .option("--from-text <text>", "extract concept tags from narrative text")
   .option("--from-url <url>", "fetch text from a URL and extract concept tags from it")
   .action(async (tags: string[], opts) => {
-    // Resolve config: CLI flags > CARATULAI_* env vars > built-in defaults
-    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", "palette-256");
+    // Resolve profile: CLI flag > env > YAML config > default
+    const profileId = (opts.profile ?? process.env.CARATULAI_PROFILE ?? (yamlConfig as any)?.generation?.profile ?? "sagan") as ProfileId;
+    const profileDef = getProfile(profileId);
+
+    // Resolve config: CLI flags > CARATULAI_* env vars > profile defaults
+    const paletteId = resolveOpt(opts.palette, "CARATULAI_PALETTE", profileDef.paletteId);
 
     // Resolve canvas dimensions: --width/--height > --ratio > CARATULAI_RATIO env > default
     let width = 512, height = 512;
@@ -244,7 +256,7 @@ program
     const svgProviderName = resolveOpt(opts.svgProvider, "CARATULAI_SVG_PROVIDER", "echo");
     const svgModelId = resolveOpt(opts.svgModel, "CARATULAI_SVG_MODEL", undefined);
 
-    console.error(`[DEBUG] TEXT: ${textProviderName}/${textModelId || "(default)"}  SVG: ${svgProviderName}/${svgModelId || "(default)"}`);
+    console.error(`[DEBUG] TEXT: ${textProviderName}/${textModelId || "(default)"}  SVG: ${svgProviderName}/${svgModelId || "(default)"}  Profile: ${profileId}`);
 
     // Image model (reading images - future: M6)
     const imageProviderName = resolveOpt(opts.imageProvider, "CARATULAI_IMAGE_PROVIDER", undefined);
@@ -344,14 +356,14 @@ program
       finalTags = tags || [];
     }
 
-    const allowAllShapes = process.env.CARATULAI_ALLOW_ALL_SHAPES !== "false";
-    const constraints = { ...createConstraints(allowAllShapes), width, height };
+    const constraints = { ...createConstraints(profileDef), width, height };
 
     const req: GenerationRequest = {
       tags: finalTags,
       palette,
       constraints,
       params: { model: svgModelId || svgProvider.models[0], temperature, seed: opts.seed },
+      profile: profileId,
     };
 
     let result;
@@ -393,6 +405,7 @@ Source:
 
 Parameters:
   Final Tags: ${finalTags.join(", ")}
+  Profile: ${profileId}
   Palette: ${paletteId}
   Ratio: ${opts.ratio || process.env.CARATULAI_RATIO || "16:9"}
   Canvas: ${width}x${height}

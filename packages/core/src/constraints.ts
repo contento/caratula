@@ -1,10 +1,10 @@
 import type { Constraints } from "./types.js";
+import type { ProfileDef } from "./profiles.js";
+import { getProfile } from "./profiles.js";
 
-/** Restricted set: fundamental shapes only. */
-const RESTRICTED_PRIMITIVES = ["path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g"];
+export const RESTRICTED_PRIMITIVES = ["path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g"];
 
-/** Unrestricted: all SVG elements (shapes, groups, text, effects, etc.) */
-const UNRESTRICTED_PRIMITIVES = [
+export const UNRESTRICTED_PRIMITIVES = [
   // Basic shapes
   "path", "line", "polyline", "polygon", "circle", "ellipse", "rect",
   // Groups & containers
@@ -31,12 +31,23 @@ export const DEFAULT_CONSTRAINTS: Constraints = {
   height: 512,
 };
 
-/** Create constraints with optional shape restrictions. */
-export function createConstraints(allowAllShapes: boolean = true): Constraints {
+/** Create constraints from a profile. Optionally pass allowAllShapes for backwards compatibility. */
+export function createConstraints(profileOrAllShapes?: ProfileDef | boolean): Constraints {
+  if (profileOrAllShapes === undefined || typeof profileOrAllShapes === "boolean") {
+    const allowAllShapes = profileOrAllShapes ?? true;
+    return {
+      allowedPrimitives: allowAllShapes ? UNRESTRICTED_PRIMITIVES : RESTRICTED_PRIMITIVES,
+      maxElements: 60,
+      maxTextElements: 0,
+      width: 512,
+      height: 512,
+    };
+  }
+  const p = profileOrAllShapes as ProfileDef;
   return {
-    allowedPrimitives: allowAllShapes ? UNRESTRICTED_PRIMITIVES : RESTRICTED_PRIMITIVES,
-    maxElements: 60,
-    maxTextElements: 0,
+    allowedPrimitives: p.allowAllShapes ? UNRESTRICTED_PRIMITIVES : RESTRICTED_PRIMITIVES,
+    maxElements: p.maxElements,
+    maxTextElements: p.maxTextElements,
     width: 512,
     height: 512,
   };

@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import yaml from "js-yaml";
 
 /**
  * Load .env file from the given directory (or cwd) and set process.env variables.
@@ -65,3 +66,26 @@ export function resolveOpt<T>(
 
   return fallback;
 }
+
+/**
+ * Load caratulai.config.yaml from the given directory (or cwd).
+ * Returns the parsed YAML as a plain object, or empty object if file doesn't exist.
+ */
+export async function loadYamlConfig(dir: string = process.cwd()): Promise<Record<string, unknown>> {
+  const filePath = join(dir, "caratulai.config.yaml");
+  let content: string;
+  try {
+    content = await readFile(filePath, "utf-8");
+  } catch {
+    // File doesn't exist or can't be read
+    return {};
+  }
+
+  try {
+    return (yaml.load(content) as Record<string, unknown>) ?? {};
+  } catch {
+    // Invalid YAML; return empty
+    return {};
+  }
+}
+

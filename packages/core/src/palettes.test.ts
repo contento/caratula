@@ -53,7 +53,7 @@ describe("snapToPalette", () => {
 describe("built-in palettes", () => {
   it("exposes the expected ids", () => {
     expect(Object.keys(BUILTIN_PALETTES).sort()).toEqual(
-      ["bw", "grayscale", "palette-16", "sepia"].sort()
+      ["bw", "grayscale", "palette-16", "palette-256", "sagan", "sepia"].sort()
     );
   });
 

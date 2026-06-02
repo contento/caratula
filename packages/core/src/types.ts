@@ -8,6 +8,9 @@
 /** Kinds of fundamental palette. No rainbows — restrained hue by design. */
 export type PaletteKind = "bw" | "grayscale" | "sepia" | "palette-16" | "palette-256";
 
+/** Named aesthetic profiles for image generation. */
+export type ProfileId = "sagan" | "picasso" | "contento" | "dictionary";
+
 /** A fundamental palette: an ordered list of hex colors output is snapped to. */
 export interface Palette {
   id: string;
@@ -54,6 +57,7 @@ export interface GenerationRequest {
   palette: Palette;
   constraints: Constraints;
   params: GenerationParams;
+  profile?: ProfileId;
 }
 
 /** Result of a generation: the SVG plus everything needed to reproduce it. */
