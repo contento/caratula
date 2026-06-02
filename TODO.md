@@ -146,13 +146,47 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 ---
 
-## M7 — Surfaces
+## M7 — Web GUI (YAML editor + gallery)
 
-> Goal: the four faces over the same engine.
+> Goal: interactive testing of profiles, YAML config, and image gallery before building surfaces.
+> Unblocks: verify M1 + M3 are solid, test all profiles with real models, gather feedback on UX.
+> Blocks: M8 (Tauri/web/server implementation).
 
-- [ ] `web` — SvelteKit or React (SPEC open question #3): generate + caratulize + gallery
-- [ ] `desktop` — Tauri 2, reusing the web UI
-- [ ] `server` — Hono API + DB (shared/remote store)
+- [ ] **Frontend** (SvelteKit, localhost:5173)
+  - [ ] YAML editor pane (syntax highlight, live validation)
+  - [ ] SVG live preview (renders generated image in real-time)
+  - [ ] Parameter tweaker (profile, seed, palette, temperature dropdowns)
+  - [ ] Generate button → invoke backend
+  - [ ] Output gallery (browse all past generations, timestamps, delete)
+  - [ ] Download SVG / export to PNG/PDF (future: M2 export)
+- [ ] **Backend** (Node.js + Hono or Express)
+  - [ ] Load/save `caratulai.config.yaml` from disk
+  - [ ] Invoke `@caratulai/core` generate() with YAML + tweaked params
+  - [ ] Manage `output/` directory (list, delete, metadata)
+  - [ ] WebSocket for live generation progress (optional, nice-to-have)
+- [ ] **Testing**
+  - [ ] Test all 6 profiles with real Ollama/LM Studio models
+  - [ ] Gather UX feedback (what parameter tweaks matter most?)
+  - [ ] Verify M1 + M3 readiness before scaling to surfaces
+
+---
+
+## M8 — Surfaces (Tauri + Web + Server)
+
+> Goal: the four faces over the same engine (web GUI now proven via M7).
+
+- [ ] **Desktop** — Tauri 2 (wraps M7 frontend, native on Mac/Win/Linux)
+  - [ ] Package M7 SvelteKit build into Tauri app
+  - [ ] Backend runs in Tauri process (Node or Rust)
+  - [ ] File access (config, output dir) via Tauri IPC
+- [ ] **Web** — Deploy M7 frontend + backend to cloud
+  - [ ] Backend: Hono on Cloudflare Workers / AWS Lambda / Railway
+  - [ ] Frontend: static SvelteKit build on Vercel / Netlify
+  - [ ] Shared gallery (multi-user, optional auth)
+- [ ] **Server** — Hono API + DB (shared/remote store)
+  - [ ] REST API for `generate`, `list`, `delete` generations
+  - [ ] Drizzle ORM + SQLite/Postgres for persistence
+  - [ ] Rate limiting, API keys
 
 ---
 
