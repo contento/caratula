@@ -76,10 +76,10 @@ Given these inputs, the LLM + validator pipeline should produce identical output
 
 ## Future: Dictionary Profile
 
-The [[design/Dictionary Profile]] extends this model with:
+The [[design/02-Dictionary Profile]] extends this model with:
 
 - **Primitives** — atomic SVG parts with semantic tags
 - **Poses** — assembled primitives
 - **Scenes** — composed poses with spatial relationships
 
-See [[design/Dictionary Profile]] for the full ontological dictionary schema.
+See [[design/02-Dictionary Profile]] for the full ontological dictionary schema.

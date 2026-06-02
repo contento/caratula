@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-**Keystone decision:** images are generated as **SVG by an LLM** (text generation), *not* by a diffusion model. This gives palette control, clean vectors, cheap iteration, and the symbolic "alien" quality. See [[decisions/ADR-0001 LLM Generates SVG]].
+**Keystone decision:** images are generated as **SVG by an LLM** (text generation), *not* by a diffusion model. This gives palette control, clean vectors, cheap iteration, and the symbolic "alien" quality. See [[decisions/01-ADR-0001 LLM Generates SVG]].
 
 ### Generation Pipeline
 
@@ -22,7 +22,7 @@ A generation *matrix* sweeping `{tags × palette × model × temperature × seed
 
 ## Tech Stack (TypeScript Monorepo)
 
-All-TypeScript monorepo (pnpm workspaces + Turborepo). See [[decisions/ADR-0002 TypeScript Monorepo]].
+All-TypeScript monorepo (pnpm workspaces + Turborepo). See [[decisions/02-ADR-0002 TypeScript Monorepo]].
 
 ### Core Packages
 
@@ -103,6 +103,6 @@ All share the same `@caratulai/core` engine and run on **Windows, macOS, Linux, 
 
 ## See Also
 
-- [[decisions/ADR-0002 TypeScript Monorepo]] — the monorepo choice and its consequences
+- [[decisions/02-ADR-0002 TypeScript Monorepo]] — the monorepo choice and its consequences
 - [[17-Roadmap]] — milestones and when each surface ships
 - [[10-Configuration]] — config.yaml and .env setup

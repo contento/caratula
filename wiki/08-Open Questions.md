@@ -42,4 +42,4 @@ Living list of decisions pending. As each question is resolved, record the decis
 ## See Also
 
 - [[17-Roadmap]] — milestones where these questions will be resolved
-- [[decisions/ADR Index]] — all recorded decisions
+- [[decisions/00-ADR Index]] — all recorded decisions

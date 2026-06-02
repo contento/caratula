@@ -446,6 +446,6 @@ Using these relationships, compose a scene where...
 ## See Also
 
 - [[08-Open Questions]] — question 6 (tag validation against ontology)
-- [[design/Ontology Extraction]] — how extraction uses the ontology
-- [[design/Dictionary Profile]] — M9 semantic querying
+- [[design/01-Ontology Extraction]] — how extraction uses the ontology
+- [[design/02-Dictionary Profile]] — M9 semantic querying
 - [[17-Roadmap]] — M3 and M9 implementation timeline

@@ -56,7 +56,7 @@ Voyager record plate aesthetic: technical, minimal, profound. The canonical refe
 
 **Max elements:** 60.
 
-**Prompt tone:** Vocabulary-centric. Compose scenes from reusable semantic primitives. See [[design/Dictionary Profile]] for the full vision.
+**Prompt tone:** Vocabulary-centric. Compose scenes from reusable semantic primitives. See [[design/02-Dictionary Profile]] for the full vision.
 
 ### freud (in development)
 

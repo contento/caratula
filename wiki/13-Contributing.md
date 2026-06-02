@@ -38,7 +38,7 @@ There is a knowledge graph in `graphify-out/` (regenerated, not committed). Afte
 
 ## Releases
 
-Releases are tag-driven: pushing a `vX.Y.Z` tag triggers the release workflow, which builds and publishes a GitHub Release with auto-generated notes. See [[decisions/ADR-0003 Versioning]] for the versioning policy.
+Releases are tag-driven: pushing a `vX.Y.Z` tag triggers the release workflow, which builds and publishes a GitHub Release with auto-generated notes. See [[decisions/03-ADR-0003 Versioning]] for the versioning policy.
 
 ## See Also
 

@@ -188,7 +188,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 ## M9 — Dictionary Profile (Ontological Symbol Composition)
 
-> Goal: transform caratulai from one-shot generator into a semantic symbol library. Vision: *"Every illustration makes the dictionary richer."* See: [[design/Dictionary Profile]]
+> Goal: transform caratulai from one-shot generator into a semantic symbol library. Vision: *"Every illustration makes the dictionary richer."* See: [[design/02-Dictionary Profile]]
 
 - [ ] **Phase 1: Foundation**
   - [ ] Define `profile/index.json` schema (primitives, poses, scenes, concepts, relationships)
@@ -230,6 +230,6 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 ## Backlog / ideas
 
-- [ ] Diffusion as an opt-in mode (non-default; see [[decisions/ADR-0001 LLM Generates SVG]])
+- [ ] Diffusion as an opt-in mode (non-default; see [[decisions/01-ADR-0001 LLM Generates SVG]])
 - [ ] Palette designer / custom fundamental palettes
 - [ ] Batch/CSV concept input

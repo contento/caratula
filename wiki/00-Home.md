@@ -27,15 +27,15 @@ Welcome to the caratulai knowledge base. caratulai is an **alien image generator
 - [[17-Roadmap]] — M0–M10 milestones
 - [[06-Seed Ontology]] — foundational concept taxonomy (visual, abstract, relationships)
 - [[07-LLM and Ontology]] — how to express ontologies to LLMs; model specialization
-- [[design/Ontology Extraction]] — how input is normalized to an ontology
-- [[design/Dictionary Profile]] — the dictionary profile vision (Tier 2–4 composition)
+- [[design/01-Ontology Extraction]] — how input is normalized to an ontology
+- [[design/02-Dictionary Profile]] — the dictionary profile vision (Tier 2–4 composition)
 
 ## Decisions
 
-- [[decisions/ADR Index]] — all architecture decisions
-- [[decisions/ADR-0001 LLM Generates SVG]] — why we generate SVG from LLMs, not diffusion
-- [[decisions/ADR-0002 TypeScript Monorepo]] — stack choice (TypeScript + pnpm + Turborepo)
-- [[decisions/ADR-0003 Versioning]] — lockstep SemVer, tag-driven releases
+- [[decisions/00-ADR Index]] — all architecture decisions
+- [[decisions/01-ADR-0001 LLM Generates SVG]] — why we generate SVG from LLMs, not diffusion
+- [[decisions/02-ADR-0002 TypeScript Monorepo]] — stack choice (TypeScript + pnpm + Turborepo)
+- [[decisions/03-ADR-0003 Versioning]] — lockstep SemVer, tag-driven releases
 
 ## Contributing
 
