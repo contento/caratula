@@ -3,10 +3,23 @@ import type { Constraints } from "./types.js";
 /** Restricted set: fundamental shapes only. */
 const RESTRICTED_PRIMITIVES = ["path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g"];
 
-/** Unrestricted: all common SVG drawables. */
+/** Unrestricted: all SVG elements (shapes, groups, text, effects, etc.) */
 const UNRESTRICTED_PRIMITIVES = [
-  "path", "line", "polyline", "polygon", "circle", "ellipse", "rect", "g",
-  "use", "image", "text", "tspan", "a", "switch"
+  // Basic shapes
+  "path", "line", "polyline", "polygon", "circle", "ellipse", "rect",
+  // Groups & containers
+  "g", "symbol", "defs", "use",
+  // Text
+  "text", "tspan", "textPath",
+  // Media
+  "image",
+  // Links
+  "a",
+  // Effects & styling
+  "linearGradient", "radialGradient", "pattern", "mask", "clipPath",
+  "marker", "filter", "feGaussianBlur", "feOffset", "feBlend",
+  // Structural
+  "svg", "title", "desc", "metadata"
 ];
 
 /** Default aesthetic constraints: rich, substantive, meaningful (Voyager Golden Record style). */

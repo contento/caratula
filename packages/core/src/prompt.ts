@@ -33,8 +33,10 @@ export function buildPrompt(req: GenerationRequest): string {
     `- Use ONLY these colors (fill/stroke), exactly as written: ${colorList}.`,
     "- No gradients, no filters, no images, no rainbows, no ornament (no rococo/baroque).",
     `- Use MANY elements (30–${constraints.maxElements}) to create visual depth and complexity. Dense, layered composition.`,
-    "- Combine: paths, lines, circles, polygons, arcs. Overlap shapes. Create intricate patterns and relationships.",
-    `- Maximum ${constraints.maxElements} drawable elements — aim for at least 40 to convey meaningful substance.`,
+    "- Use any SVG elements: paths, lines, circles, polygons, arcs, rectangles, groups, gradients, patterns, effects.",
+    "- Overlap shapes. Layer groups. Create intricate patterns, relationships, and visual complexity.",
+    "- Use gradients and patterns for richness. Create visual depth through layering and nesting.",
+    `- Maximum ${constraints.maxElements} drawable elements — aim for 40–60 for true substance.`,
     constraints.maxTextElements === 0
       ? "- No text at all."
       : `- At most ${constraints.maxTextElements} short text label(s).`,
