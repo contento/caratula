@@ -499,7 +499,7 @@ Result: Image depicting the hero crossing into the unknown
 - [[Freud Profile Seed]] — psychoanalytic layers (id/ego/superego)
 - [[Nietzsche Profile Seed]] — genealogical philosophy
 - [[07-LLM and Ontology]] — archetypal extraction and reasoning
-- [[06-Seed Ontology]] — core visual and abstract concepts
+- [[06-Ontology Seed]] — core visual and abstract concepts
 - [[17-Roadmap]] — M1 (profiling) and M9 (dictionary) timelines
 
 ## References
