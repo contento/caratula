@@ -1,0 +1,20 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    { "query": "path:decisions/", "color": { "a": 1, "rgb": 9671434 } },
+    { "query": "path:design/",    "color": { "a": 1, "rgb": 3851284 } }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeThreshold": 0.6,
+  "nodeSizeMultiplier": 1.0,
+  "linksHighlightIssues": false,
+  "scale": 1.0,
+  "close": false
+}

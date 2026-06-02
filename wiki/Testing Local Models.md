@@ -36,7 +36,7 @@ ollama pull llama2-uncensored   # Experimental, more creative
 
 Then generate with:
 ```bash
-./caratulai.sh generate-svg star water --svg-provider ollama --svg-model llama2
+node packages/cli/dist/index.js generate star water --provider ollama --model llama2
 ```
 
 ### 3. **vLLM** (Advanced, fastest inference)
@@ -63,15 +63,15 @@ Then generate with:
 ### Step 2: Test with caratulai
 ```bash
 # Test sagan profile (minimal, gold/silver)
-./caratulai.sh generate-svg star water --svg-provider lmstudio --svg-model mistral
+node packages/cli/dist/index.js generate star water --profile sagan --provider lmstudio --model mistral --out out/sagan.svg
 
 # Test contento profile (dense, 80+ elements)
-./caratulai.sh generate-svg star water --profile contento --svg-provider lmstudio --svg-model mistral
+node packages/cli/dist/index.js generate star water --profile contento --provider lmstudio --model mistral --out out/contento.svg
 
 # Test picasso profile (sparse, single-line)
-./caratulai.sh generate-svg star water --profile picasso --svg-provider lmstudio --svg-model mistral
+node packages/cli/dist/index.js generate star water --profile picasso --provider lmstudio --model mistral --out out/picasso.svg
 
-# Auto-saves to ./output/ with timestamps (configured in YAML)
+# Auto-saves to ./output/ with timestamps (configured in config.yaml)
 ```
 
 ### Step 3: Check results
@@ -98,9 +98,9 @@ Test all profiles and measure quality:
 - [ ] **Performance** → measure time per generation (goal: < 30s on M1 Mac)
 
 ### Metrics to track:
-- **Generation time**: `time ./caratulai.sh generate-svg star`
+- **Generation time**: `time node packages/cli/dist/index.js generate star`
 - **Element count**: Check SVG source: `grep -c '<' output/*.svg`
-- **Color accuracy**: Verify colors in SVG match palette (use `grep fill``)
+- **Color accuracy**: Verify colors in SVG match palette (use `grep fill`)
 - **Prompt adherence**: Does output respect element count limits?
 
 ---
@@ -109,9 +109,9 @@ Test all profiles and measure quality:
 
 ### Via CLI flag (highest priority):
 ```bash
-./caratulai.sh generate-svg star --svg-provider lmstudio --svg-model mistral
-./caratulai.sh generate-svg star --svg-provider ollama --svg-model llama2
-./caratulai.sh generate-svg star --svg-provider openrouter --svg-model x-ai/grok-2-1212
+node packages/cli/dist/index.js generate star --provider lmstudio --model mistral
+node packages/cli/dist/index.js generate star --provider ollama --model llama2
+node packages/cli/dist/index.js generate star --provider openrouter --model x-ai/grok-2-1212
 ```
 
 ### Via YAML config (project default):
@@ -144,7 +144,7 @@ models:
 
 ### SVG quality is poor
 - Model may not understand SVG syntax
-- Try: `--svg-model qwen2.5-coder` (optimized for code generation)
+- Try: `--model qwen2.5-coder` (optimized for code generation)
 - Increase temperature: `-t 0.8` (more creativity)
 - Or use a better model (Anthropic Claude, paid, but excellent at SVG)
 - Check prompt in `.log` file — does it look reasonable?
@@ -170,3 +170,9 @@ models:
 - Grok-2 (via OpenRouter) — very good at complex instructions
 
 Start with **Tier 1** to verify the pipeline works, then upgrade to Tier 2/3 as needed.
+
+## See Also
+
+- [[LLM Providers]] — full provider setup guide (Ollama, LM Studio, OpenRouter)
+- [[Configuration]] — how to configure your default provider
+- [[Getting Started]] — first-time setup
