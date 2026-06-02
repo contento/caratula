@@ -43,7 +43,7 @@ exists to make them.
 
 ## Image Generation Profiles
 
-Four aesthetic styles for different contexts:
+Six aesthetic styles for different contexts:
 
 | Profile | Aesthetic | Colors | Elements | Use Case |
 | --- | --- | --- | --- | --- |
@@ -51,6 +51,8 @@ Four aesthetic styles for different contexts:
 | **picasso** | Elegant lines, minimal | B/W, grayscale | Few shapes | Sophisticated, reductive |
 | **contento** | Rich, dense, layered | 256-color | 80+ shapes | Visual abundance, complex concepts |
 | **dictionary** | Vocabulary-based patterns | 256-color | Icons + patterns | Semantic visual library |
+| **jung** *(future)* | Archetypal symbols | 256-color | 50+ shapes | Psychological/symbolic depth |
+| **nietzsche** *(future)* | Full ontology-driven | 256-color | Variable | Philosophical/conceptual mapping |
 
 Set in `caratulai.config.yaml` → `generation.profile` or CLI flag `--profile sagan`.
 

@@ -35,11 +35,19 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [x] **Test suite** (Vitest): 69 tests across validator, palettes, prompt, generate, providers,
       model ladder, HTTP provider (mocked fetch), factories — coverage thresholds enforced (≥98%)
 - [x] Re-enable the CI `test` step (now runs with coverage gating)
-- [x] **Image generation profiles** (aesthetic styles):
+- [x] **Image generation profiles** (aesthetic styles — 4 of 6 done):
   - [x] sagan — Voyager Golden Record (gold + silver)
   - [x] picasso — elegant lines, minimal (single-line B/W, 20 elements)
   - [x] contento — less restrained, 80+ shapes, dense composition
   - [x] dictionary — vocabulary-based patterns (256-color, 60 elements)
+  - [ ] **jung** — archetypal symbols (psychological/symbolic depth)
+    - [ ] Define Jungian archetype vocabulary (shadow, anima, self, hero, etc.)
+    - [ ] Map concepts to archetypal visual primitives
+    - [ ] Design prompt tone: mythic, symbolic, transpersonal
+  - [ ] **nietzsche** — full ontology-driven (rename to reflect philosophy?)
+    - [ ] Leverage full M3 ontology (concept taxonomy + relations)
+    - [ ] Map concept hierarchies to visual hierarchies (parent→child shapes)
+    - [ ] Design prompt tone: dialectical, relational, genealogical
 - [ ] Verify against a live local model (Ollama/LM Studio) and tune the prompt
   - [ ] Test sagan profile with Ollama qwen2.5-coder or similar
   - [ ] Test contento profile — verify 80-element density achievable
