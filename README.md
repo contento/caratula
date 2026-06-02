@@ -98,16 +98,23 @@ so you can see the validator snap colors and strip disallowed elements. Real LLM
 caratulai turns minimal text into simple SVG via any OpenAI-compatible backend — local or remote:
 
 ```sh
-# local, free (Ollama)
-caratulai generate star water travel --palette sepia --provider ollama --model qwen2.5-coder
+# local, free (LM Studio on Mac — recommended for testing)
+./caratulai.sh generate-svg star water --svg-provider lmstudio --svg-model mistral
 
-# remote (OpenRouter — Grok, or a cheap model)
-export OPENROUTER_API_KEY=sk-or-...
-caratulai generate star water travel --palette sepia --provider openrouter --model x-ai/grok-2-1212
+# local, free (Ollama — production, CLI-friendly)
+./caratulai.sh generate-svg star water --svg-provider ollama --svg-model qwen2.5-coder
+
+# remote (OpenRouter — Grok, Claude, or cheap models)
+export SVG_MODEL_API_KEY=sk-or-...
+./caratulai.sh generate-svg star water --svg-provider openrouter --svg-model x-ai/grok-2-1212
 ```
 
-Backends: `echo` (placeholder) · `ollama` · `lmstudio` · `openrouter`. Full setup — including the
-cheapest OpenRouter picks — is in **[docs/providers.md](docs/providers.md)**.
+**Backends**: `echo` (placeholder) · `lmstudio` (Mac/Win/Linux GUI) · `ollama` (CLI) · `openrouter` (remote).
+
+**Getting started**:
+
+- **[docs/testing-local-models.md](docs/testing-local-models.md)** — quick start with LM Studio on Mac + recommended models
+- **[docs/providers.md](docs/providers.md)** — detailed setup for all backends + OpenRouter API keys
 
 ---
 
