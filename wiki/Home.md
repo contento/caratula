@@ -14,6 +14,10 @@ Welcome to the caratulai knowledge base. caratulai is an **alien image generator
 - [[Vision]] — why caratulai exists, the founding prompt, the musical analogy
 - [[Principles]] — the 7 hard aesthetic constraints (enforced, not optional)
 - [[Profiles]] — the 7 generation profiles (sagan, picasso, contento, dictionary, freud, jung, nietzsche)
+  - **Future profiles (detailed seeds):**
+    - [[Freud Profile Seed]] — layers of the psyche (id/ego/superego, defense mechanisms, dream logic)
+    - [[Jung Profile Seed]] — archetypal symbols (hero, shadow, anima/animus, self, mandalas)
+    - [[Nietzsche Profile Seed]] — genealogy of concepts (master/slave morality, will-to-power, eternal recurrence)
 - [[Stack]] — tech stack, monorepo layout, pipeline, surfaces
 - [[Data Model]] — Concept, Tag, Palette, Generation, Image
 - [[Open Questions]] — decisions still pending
