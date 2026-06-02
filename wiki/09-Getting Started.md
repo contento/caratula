@@ -87,16 +87,16 @@ node packages/cli/dist/index.js generate star water --palette sepia \
 1. **`caratulai.config.yaml`** — shareable configuration (models, palette, output dir, etc.). Committed to repo.
 2. **`.env`** — secrets only (API keys). Gitignored. Copy `.env.example` and fill in your keys.
 
-See [[Configuration]] for details.
+See [[10-Configuration]] for details.
 
 ## Next Steps
 
-- Read [[Principles]] — understand the aesthetic constraints
-- Read [[Profiles]] — learn about the different generation styles
-- Read [[Stack]] — understand the architecture
-- Read [[Contributing]] — if you want to contribute code
-- Try different [[LLM Providers]] — local and remote
-- See [[Testing Local Models]] — quick-start with LM Studio/Ollama
+- Read [[02-Principles]] — understand the aesthetic constraints
+- Read [[03-Profiles]] — learn about the different generation styles
+- Read [[04-Stack]] — understand the architecture
+- Read [[13-Contributing]] — if you want to contribute code
+- Try different [[11-LLM Providers]] — local and remote
+- See [[12-Testing Local Models]] — quick-start with LM Studio/Ollama
 
 ## Troubleshooting
 
@@ -116,10 +116,10 @@ See [[Configuration]] for details.
 **Generation is slow**
 - First generation with LM Studio/Ollama can be slow (model load)
 - Try a smaller model: `mistral-7b` or `neural-chat-7b` instead of `llama2-13b`
-- See [[Testing Local Models]] for detailed benchmarking
+- See [[12-Testing Local Models]] for detailed benchmarking
 
 ## See Also
 
-- [[LLM Providers]] — full setup guide for all backends
-- [[Testing Local Models]] — benchmark models and measure performance
-- [[Configuration]] — config.yaml reference
+- [[11-LLM Providers]] — full setup guide for all backends
+- [[12-Testing Local Models]] — benchmark models and measure performance
+- [[10-Configuration]] — config.yaml reference

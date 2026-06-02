@@ -34,8 +34,8 @@ This project has a knowledge graph at `graphify-out/`.
 
 ## See Also
 
-- **[[wiki/Vision]]** — why it exists, name, musical analogy
-- **[[wiki/Principles]]** — the 7 hard aesthetic constraints (required reading)
-- **[[wiki/Profiles]]** — the 7 generation profiles and their specs
-- **[[wiki/Stack]]** — tech stack, monorepo layout, architecture
-- **[[wiki/Roadmap]]** — M0–M10 milestones
+- **[[wiki/01-Vision]]** — why it exists, name, musical analogy
+- **[[wiki/02-Principles]]** — the 7 hard aesthetic constraints (required reading)
+- **[[wiki/03-Profiles]]** — the 7 generation profiles and their specs
+- **[[wiki/04-Stack]]** — tech stack, monorepo layout, architecture
+- **[[wiki/17-Roadmap]]** — M0–M10 milestones

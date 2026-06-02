@@ -105,5 +105,5 @@ node packages/cli/dist/index.js generate star water --profile sagan --out out/id
 
 ## See Also
 
-- [[Principles]] — the 7 hard aesthetic constraints all profiles enforce
-- [[Stack]] — the generation pipeline and how profiles shape prompts
+- [[02-Principles]] — the 7 hard aesthetic constraints all profiles enforce
+- [[04-Stack]] — the generation pipeline and how profiles shape prompts

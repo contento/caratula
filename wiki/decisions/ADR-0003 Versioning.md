@@ -28,4 +28,4 @@ Options for project versioning ranged from lockstep (one version for the whole r
 
 - Releasing is one command: tag and push. No version-bump ceremony pre-1.0.
 - Mutually-conflicting dependency bumps (shared workflow files / lockfile) may be consolidated into a single verified commit rather than merged one-by-one — same end state, less churn.
-- The disabled CI test step (see [[Roadmap]]) is the gap that currently makes major bumps a manual verification; closing it (validator unit tests) restores automation.
+- The disabled CI test step (see [[17-Roadmap]]) is the gap that currently makes major bumps a manual verification; closing it (validator unit tests) restores automation.

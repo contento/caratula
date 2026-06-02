@@ -325,7 +325,7 @@ Assuming Claude Sonnet pricing (~$3 per 1M input tokens):
 
 ## See Also
 
-- [[Seed Ontology]] — the actual caratulai ontology structure
+- [[06-Seed Ontology]] — the actual caratulai ontology structure
 - [[design/Ontology Extraction]] — how extraction uses the ontology
 - [[design/Dictionary Profile]] — semantic composition and querying
-- [[Roadmap]] — M3 (Ontology) and M9 (Dictionary) timelines
+- [[17-Roadmap]] — M3 (Ontology) and M9 (Dictionary) timelines

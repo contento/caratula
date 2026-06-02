@@ -1,6 +1,6 @@
 # Contributing to caratulai
 
-Thanks for your interest! caratulai is an alien image generator — concepts to simple vector images in fundamental palettes. Before contributing, skim [[Vision]] and [[Principles]] to absorb the aesthetic; it is enforced, not optional.
+Thanks for your interest! caratulai is an alien image generator — concepts to simple vector images in fundamental palettes. Before contributing, skim [[01-Vision]] and [[02-Principles]] to absorb the aesthetic; it is enforced, not optional.
 
 ## Development setup
 
@@ -27,7 +27,7 @@ There is a knowledge graph in `graphify-out/` (regenerated, not committed). Afte
 
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) — `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`. Keep them small and focused.
 - **Code:** ESM TypeScript, `@caratulai/<name>` scope. Match the surrounding style.
-- **Aesthetic:** any change to generation must keep output passing the validator — fundamental palettes only, simple primitives, little/no text. See [[Principles]].
+- **Aesthetic:** any change to generation must keep output passing the validator — fundamental palettes only, simple primitives, little/no text. See [[02-Principles]].
 - **Decisions:** record non-obvious choices as short ADRs in `wiki/decisions/`.
 
 ## Pull requests
@@ -42,6 +42,6 @@ Releases are tag-driven: pushing a `vX.Y.Z` tag triggers the release workflow, w
 
 ## See Also
 
-- [[Stack]] — tech stack and architecture
-- [[Roadmap]] — milestones and what's next
-- [[Principles]] — the aesthetic constraints (required reading)
+- [[04-Stack]] — tech stack and architecture
+- [[17-Roadmap]] — milestones and what's next
+- [[02-Principles]] — the aesthetic constraints (required reading)

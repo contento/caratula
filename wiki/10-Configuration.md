@@ -94,6 +94,6 @@ node packages/cli/dist/index.js generate star water --provider lmstudio --model 
 
 ## See Also
 
-- [[Getting Started]] — first-time setup
-- [[LLM Providers]] — which provider to choose and how to set up each one
-- [[Testing Local Models]] — verify your config works on your machine
+- [[09-Getting Started]] — first-time setup
+- [[11-LLM Providers]] — which provider to choose and how to set up each one
+- [[12-Testing Local Models]] — verify your config works on your machine

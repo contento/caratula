@@ -78,6 +78,6 @@ One API key gives access to hundreds of models (Grok, Gemini, Llama, Claude, …
 
 ## See Also
 
-- [[Testing Local Models]] — quick-start and benchmarking for LM Studio / Ollama
-- [[Configuration]] — how to set provider in config.yaml or .env
-- [[Getting Started]] — first-time setup with a real LLM
+- [[12-Testing Local Models]] — quick-start and benchmarking for LM Studio / Ollama
+- [[10-Configuration]] — how to set provider in config.yaml or .env
+- [[09-Getting Started]] — first-time setup with a real LLM

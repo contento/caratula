@@ -173,6 +173,6 @@ Start with **Tier 1** to verify the pipeline works, then upgrade to Tier 2/3 as 
 
 ## See Also
 
-- [[LLM Providers]] — full provider setup guide (Ollama, LM Studio, OpenRouter)
-- [[Configuration]] — how to configure your default provider
-- [[Getting Started]] — first-time setup
+- [[11-LLM Providers]] — full provider setup guide (Ollama, LM Studio, OpenRouter)
+- [[10-Configuration]] — how to configure your default provider
+- [[09-Getting Started]] — first-time setup

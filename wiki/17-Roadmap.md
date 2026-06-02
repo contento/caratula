@@ -1,6 +1,6 @@
 # Roadmap
 
-Organized as **milestones** (a shippable increment with a goal) → **tasks** (checkboxes). Keep this current; promote big decisions to [[decisions/ADR Index|ADRs]]. Open questions live in [[Open Questions]]. Versioning is lockstep + tag-driven ([[decisions/ADR-0003 Versioning|ADR-0003]]).
+Organized as **milestones** (a shippable increment with a goal) → **tasks** (checkboxes). Keep this current; promote big decisions to [[decisions/ADR Index|ADRs]]. Open questions live in [[08-Open Questions]]. Versioning is lockstep + tag-driven ([[decisions/ADR-0003 Versioning|ADR-0003]]).
 
 Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
@@ -29,7 +29,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [x] **LM Studio provider** (local, free)
 - [x] **OpenRouter provider** (remote — Grok + cheap models)
 - [x] CLI wiring: `--provider` / `--model` / `--base-url`; minimalist `SYSTEM_PROMPT`
-- [x] Provider docs ([[LLM Providers]]) + `.env.example`
+- [x] Provider docs ([[11-LLM Providers]]) + `.env.example`
 - [x] **Test suite** (Vitest): 69 tests across validator, palettes, prompt, generate, providers, model ladder, HTTP provider (mocked fetch), factories — coverage thresholds enforced (≥98%)
 - [x] Re-enable the CI `test` step (now runs with coverage gating)
 - [x] **Image generation profiles** (aesthetic styles — 4 of 7 done):
@@ -71,7 +71,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 - [ ] SVG → PDF (`pdf-lib` / `svg2pdf`)
 - [ ] SVG → ICO (`png-to-ico`)
 - [ ] `caratulai export <svg> --to png,pdf,...` command
-- [ ] Decide extra formats (WebP, EPS?) — see [[Vision]]
+- [ ] Decide extra formats (WebP, EPS?) — see [[01-Vision]]
 
 ---
 

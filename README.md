@@ -22,11 +22,11 @@ node packages/cli/dist/index.js generate star water travel --palette sepia --out
 
 Full documentation lives in the wiki — open [wiki/](wiki/) as an Obsidian vault or read on GitHub.
 
-- **[Vision](wiki/Vision.md)** — why this exists, the founding prompt, the musical analogy
-- **[Getting Started](wiki/Getting%20Started.md)** — install, run, first generation
-- **[Profiles](wiki/Profiles.md)** — aesthetic styles (sagan · picasso · contento · dictionary · ...)
-- **[LLM Providers](wiki/LLM%20Providers.md)** — local (Ollama · LM Studio) and remote (OpenRouter)
-- **[Roadmap](wiki/Roadmap.md)** — M0–M10 milestones
-- **[Contributing](wiki/Contributing.md)** — dev setup, conventions, PRs
+- **[Vision](wiki/01-Vision.md)** — why this exists, the founding prompt, the musical analogy
+- **[Getting Started](wiki/09-Getting%20Started.md)** — install, run, first generation
+- **[Profiles](wiki/03-Profiles.md)** — aesthetic styles (sagan · picasso · contento · dictionary · ...)
+- **[LLM Providers](wiki/11-LLM%20Providers.md)** — local (Ollama · LM Studio) and remote (OpenRouter)
+- **[Roadmap](wiki/17-Roadmap.md)** — M0–M10 milestones
+- **[Contributing](wiki/13-Contributing.md)** — dev setup, conventions, PRs
 
 Status: early build. Core engine + CLI are working; web/desktop/server deferred.

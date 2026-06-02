@@ -4,29 +4,29 @@ Welcome to the caratulai knowledge base. caratulai is an **alien image generator
 
 ## Getting Started
 
-- [[Getting Started]] — install, build, first generation
-- [[Configuration]] — config.yaml and .env
-- [[LLM Providers]] — how to set up local (LM Studio, Ollama) and remote (OpenRouter) backends
-- [[Testing Local Models]] — quick-start for testing on your machine
+- [[09-Getting Started]] — install, build, first generation
+- [[10-Configuration]] — config.yaml and .env
+- [[11-LLM Providers]] — how to set up local (LM Studio, Ollama) and remote (OpenRouter) backends
+- [[12-Testing Local Models]] — quick-start for testing on your machine
 
 ## Project Knowledge
 
-- [[Vision]] — why caratulai exists, the founding prompt, the musical analogy
-- [[Principles]] — the 7 hard aesthetic constraints (enforced, not optional)
-- [[Profiles]] — the 7 generation profiles (sagan, picasso, contento, dictionary, freud, jung, nietzsche)
+- [[01-Vision]] — why caratulai exists, the founding prompt, the musical analogy
+- [[02-Principles]] — the 7 hard aesthetic constraints (enforced, not optional)
+- [[03-Profiles]] — the 7 generation profiles (sagan, picasso, contento, dictionary, freud, jung, nietzsche)
   - **Future profiles (detailed seeds):**
     - [[Freud Profile Seed]] — layers of the psyche (id/ego/superego, defense mechanisms, dream logic)
     - [[Jung Profile Seed]] — archetypal symbols (hero, shadow, anima/animus, self, mandalas)
     - [[Nietzsche Profile Seed]] — genealogy of concepts (master/slave morality, will-to-power, eternal recurrence)
-- [[Stack]] — tech stack, monorepo layout, pipeline, surfaces
-- [[Data Model]] — Concept, Tag, Palette, Generation, Image
-- [[Open Questions]] — decisions still pending
+- [[04-Stack]] — tech stack, monorepo layout, pipeline, surfaces
+- [[05-Data Model]] — Concept, Tag, Palette, Generation, Image
+- [[08-Open Questions]] — decisions still pending
 
 ## Design & Architecture
 
-- [[Roadmap]] — M0–M10 milestones
-- [[Seed Ontology]] — foundational concept taxonomy (visual, abstract, relationships)
-- [[LLM and Ontology]] — how to express ontologies to LLMs; model specialization
+- [[17-Roadmap]] — M0–M10 milestones
+- [[06-Seed Ontology]] — foundational concept taxonomy (visual, abstract, relationships)
+- [[07-LLM and Ontology]] — how to express ontologies to LLMs; model specialization
 - [[design/Ontology Extraction]] — how input is normalized to an ontology
 - [[design/Dictionary Profile]] — the dictionary profile vision (Tier 2–4 composition)
 
@@ -39,4 +39,4 @@ Welcome to the caratulai knowledge base. caratulai is an **alien image generator
 
 ## Contributing
 
-- [[Contributing]] — development setup, conventions, PR process, releases
+- [[13-Contributing]] — development setup, conventions, PR process, releases

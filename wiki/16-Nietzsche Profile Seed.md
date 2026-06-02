@@ -576,9 +576,9 @@ Goal: Generate image that tests the concept's affirmative power
 
 - [[Freud Profile Seed]] — psychoanalytic layers
 - [[Jung Profile Seed]] — archetypal psychology
-- [[LLM and Ontology]] — genealogical extraction and reasoning
-- [[Seed Ontology]] — core concepts
-- [[Roadmap]] — M1 (profiling) and M9 (dictionary) timelines
+- [[07-LLM and Ontology]] — genealogical extraction and reasoning
+- [[06-Seed Ontology]] — core concepts
+- [[17-Roadmap]] — M1 (profiling) and M9 (dictionary) timelines
 
 ## References
 

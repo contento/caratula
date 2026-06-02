@@ -104,5 +104,5 @@ All share the same `@caratulai/core` engine and run on **Windows, macOS, Linux, 
 ## See Also
 
 - [[decisions/ADR-0002 TypeScript Monorepo]] — the monorepo choice and its consequences
-- [[Roadmap]] — milestones and when each surface ships
-- [[Configuration]] — config.yaml and .env setup
+- [[17-Roadmap]] — milestones and when each surface ships
+- [[10-Configuration]] — config.yaml and .env setup
