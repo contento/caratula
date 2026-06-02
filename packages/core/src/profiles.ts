@@ -55,6 +55,7 @@ export const PROFILES: Record<ProfileId, ProfileDef> = {
       "Create a rich, dense, layered composition with maximum visual complexity.",
       "Use all available SVG shapes, gradients, patterns, effects. Fill the canvas.",
       "Layer and overlap. No restrictions. Maximalist but coherent — abundance, not chaos.",
+      "CRITICAL: ZERO TEXT. No <text> elements at all. Meaning comes from pure visual structure.",
     ].join(" "),
   },
 
