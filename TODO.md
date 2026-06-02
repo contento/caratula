@@ -190,7 +190,41 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⭐ new
 
 ---
 
-## M8 — 1.0
+## M9 — Dictionary Profile (Ontological Symbol Composition)
+
+> Goal: transform caratulai from one-shot generator into a semantic symbol library.
+> Vision: *"Every illustration makes the dictionary richer."*
+> See: [docs/dictionary-profile.md](docs/dictionary-profile.md)
+
+- [ ] **Phase 1: Foundation**
+  - [ ] Define `profile/index.json` schema (primitives, poses, scenes, concepts, relationships)
+  - [ ] File validator (reference integrity, no cycles)
+  - [ ] SVG `<use>` resolver (primitives → poses → scenes)
+  - [ ] CLI `compose` command (query dictionary → assemble SVG)
+  - [ ] Palette CSS (single source of truth for color)
+  - [ ] First primitive set (animals: dog, cat, lion, camel, bird)
+  - [ ] First pose set (sitting, walking, resting, standing, kneeling)
+
+- [ ] **Phase 2: Gap Detection & Auto-Design**
+  - [ ] LLM extractor: scene request → needed primitives + gaps
+  - [ ] Gap detector: which concepts missing from dictionary?
+  - [ ] Designer LLM: generate SVG for missing primitives
+  - [ ] Auto-register: add to index.json + save files
+
+- [ ] **Phase 3: Semantic Querying**
+  - [ ] Query by meaning ("show things that symbolize defiance")
+  - [ ] Relationship traversal ("what's related to lion/roaring?")
+  - [ ] Suggest reuse ("this concept could use [existing primitives]")
+
+- [ ] **Phase 4: Dictionary Browser**
+  - [ ] Static HTML viewer over index.json
+  - [ ] Search by tag, symbol, relationship
+  - [ ] Visual preview of each primitive/pose/scene
+  - [ ] Edit metadata (tags, relationships, symbolism)
+
+---
+
+## M10 — 1.0
 
 > Goal: stabilize and ship a real release.
 
